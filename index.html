@@ -3,61 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <header>
-        <h1>Climate: Zero</h1>
-        <p>Zbuduj miasto przyszłości</p>
-    </header>
-    <!-- ===== BIBLIOTEKI ===== -->
-    <!-- Leaflet.js - interaktywna mapa -->
-    <link
-        rel="stylesheet"
-        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    >
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <!-- Chart.js - wykresy -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js"></script>
-    <!-- Lucide - ikony -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- GSAP - animacje -->
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-    <!-- ===== NASZE PLIKI ===== -->
+    <title>Climate: Zero</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <header>
-        <div class="logo">
-            🌍 Climate: Zero
-        </div>
 
-        <div class="city-name">
-            🏙️ Moje miasto
-        </div>
-    </header>
-    <main>
+<header>
+
+    <div class="logo">
+        🌍 Climate: Zero
+    </div>
+
+    <div class="city-name">
+        🏙️ Moje miasto
+    </div>
+
+</header>
+
+<main>
 
     <section class="city-panel">
-        <div class="city-view">
 
-            <div class="building">🏢</div>
-            <div class="building">🏭</div>
-            <div class="building">🏠</div>
-            <div class="building">🏢</div>
-            <div class="building">🏭</div>
-
-            <div class="tree">🌳</div>
-            <div class="tree">🌳</div>
-            <div class="tree">🌳</div>
-
-            <div class="car">🚗</div>
-            <div class="car">🚙</div>
-
-        </div>
         <h1>🏙️ Moje miasto</h1>
 
         <p>Witaj w swoim mieście!</p>
 
+
+        <!-- WIDOK MIASTA -->
+
+        <div class="city-view">
+
+            <div class="building">🏢</div>
+
+            <div class="building factory" id="factory-1">
+                🏭
+            </div>
+
+            <div class="building">🏠</div>
+
+            <div class="building">🏢</div>
+
+            <div class="building">🏭</div>
+
+            <div class="tree">🌳</div>
+
+            <div class="tree">🌳</div>
+
+            <div class="tree">🌳</div>
+
+            <div class="car">🚗</div>
+
+            <div class="car">🚙</div>
+
+        </div>
+
+
+        <!-- INFORMACJE O OBIEKCIE -->
+
+        <div id="info-panel" class="info-panel">
+
+            <h2>🏭 Fabryka</h2>
+
+            <p>
+                Kliknij obiekt w mieście,
+                aby zobaczyć informacje.
+            </p>
+
+        </div>
+
+
+        <!-- STATYSTYKI -->
+
         <div class="city-stats">
+
             <div>
                 🌫️ Poziom CO₂
                 <strong id="co2">75%</strong>
@@ -72,20 +92,57 @@
                 🏭 Fabryki
                 <strong id="factories">12</strong>
             </div>
+
+            <div>
+                💰 Budżet
+                <strong id="budget">1000 $</strong>
+            </div>
+
         </div>
+
+
+        <!-- PASEK ZANIECZYSZCZENIA -->
+
+        <div class="pollution-bar-container">
+
+            <div class="pollution-info">
+
+                <span>🌫️ Zanieczyszczenie</span>
+
+                <strong id="pollution-value">
+                    75%
+                </strong>
+
+            </div>
+
+            <div class="pollution-bar">
+
+                <div id="pollution-fill"></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- STARY PRZYCISK TESTOWY -->
 
         <button id="reduce-emission">
             🌱 Zmniejsz emisję
         </button>
 
+
+        <!-- TESTOWY RESET BUDŻETU -->
+
+        <button id="reset-budget">
+            🛠️ TEST — Przywróć 1000 $
+        </button>
+
     </section>
 
 </main>
-    <script src="script.js"></script>
-    <link rel="stylesheet" href="style.css">
-    <script>
-        lucide.createIcons();
-    </script>
+
+
+<script src="script.js"></script>
 
 </body>
 </html>
