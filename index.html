@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <header>
+        <h1>Climate: Zero</h1>
+        <p>Zbuduj miasto przyszłości</p>
+    </header>
+    <!-- ===== BIBLIOTEKI ===== -->
+    <!-- Leaflet.js - interaktywna mapa -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Chart.js - wykresy -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js"></script>
+    <!-- Lucide - ikony -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- GSAP - animacje -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <!-- ===== NASZE PLIKI ===== -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            🌍 Climate: Zero
+        </div>
+
+        <div class="city-name">
+            🏙️ Moje miasto
+        </div>
+    </header>
+    <main>
+
+    <section class="city-panel">
+        <div class="city-view">
+
+            <div class="building">🏢</div>
+            <div class="building">🏭</div>
+            <div class="building">🏠</div>
+            <div class="building">🏢</div>
+            <div class="building">🏭</div>
+
+            <div class="tree">🌳</div>
+            <div class="tree">🌳</div>
+            <div class="tree">🌳</div>
+
+            <div class="car">🚗</div>
+            <div class="car">🚙</div>
+
+        </div>
+        <h1>🏙️ Moje miasto</h1>
+
+        <p>Witaj w swoim mieście!</p>
+
+        <div class="city-stats">
+            <div>
+                🌫️ Poziom CO₂
+                <strong id="co2">75%</strong>
+            </div>
+
+            <div>
+                🌱 Czystość
+                <strong id="cleanliness">40%</strong>
+            </div>
+
+            <div>
+                🏭 Fabryki
+                <strong id="factories">12</strong>
+            </div>
+        </div>
+
+        <button id="reduce-emission">
+            🌱 Zmniejsz emisję
+        </button>
+
+    </section>
+
+</main>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        lucide.createIcons();
+    </script>
+
+</body>
+</html>
