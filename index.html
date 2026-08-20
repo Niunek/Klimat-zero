@@ -1,11 +1,20 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>Climate: Zero</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 </head>
 
 <body>
@@ -22,122 +31,330 @@
 
 </header>
 
+
 <main>
 
-    <section class="city-panel">
+<section class="city-panel">
 
-        <h1>🏙️ Moje miasto</h1>
+    <h1>
+        🏙️ Moje miasto
+    </h1>
 
-        <p>Witaj w swoim mieście!</p>
+    <p>
+        Zarządzaj miastem i zmniejszaj jego wpływ na klimat.
+    </p>
 
 
-        <!-- WIDOK MIASTA -->
+    <!-- ========================= -->
+    <!-- MIASTO -->
+    <!-- ========================= -->
 
-        <div class="city-view">
+    <div class="city-view">
 
-            <div class="building">🏢</div>
 
-            <div class="building factory" id="factory-1">
-                🏭
-            </div>
+        <!-- BIUROWIEC 1 -->
 
-            <div class="building">🏠</div>
+        <div
+            class="building"
+            data-type="office"
+            data-id="office-1"
+        >
+            🏢
+        </div>
 
-            <div class="building">🏢</div>
 
-            <div class="building">🏭</div>
+        <!-- FABRYKA CHEMICZNA -->
 
-            <div class="tree">🌳</div>
+        <div
+            class="building factory"
+            data-type="chemical-factory"
+            data-id="factory-1"
+        >
+            🏭
+        </div>
 
-            <div class="tree">🌳</div>
 
-            <div class="tree">🌳</div>
+        <!-- DOM -->
 
-            <div class="car">🚗</div>
+        <div
+            class="building"
+            data-type="house"
+            data-id="house-1"
+        >
+            🏠
+        </div>
 
-            <div class="car">🚙</div>
+
+        <!-- BIUROWIEC 2 -->
+
+        <div
+            class="building"
+            data-type="office"
+            data-id="office-2"
+        >
+            🏢
+        </div>
+
+
+        <!-- FABRYKA PRZEMYSŁOWA -->
+
+        <div
+            class="building factory"
+            data-type="industrial-factory"
+            data-id="factory-2"
+        >
+            🏭
+        </div>
+
+
+        <!-- PARK 1 -->
+
+        <div
+            class="tree"
+            data-type="park"
+            data-id="park-1"
+        >
+            🌳
+        </div>
+
+
+        <!-- PARK 2 -->
+
+        <div
+            class="tree"
+            data-type="park"
+            data-id="park-2"
+        >
+            🌳
+        </div>
+
+
+        <!-- PARK 3 -->
+
+        <div
+            class="tree"
+            data-type="park"
+            data-id="park-3"
+        >
+            🌳
+        </div>
+
+
+        <!-- SAMOCHÓD 1 -->
+
+        <div
+            class="car"
+            data-type="car"
+            data-id="car-1"
+        >
+            🚗
+        </div>
+
+
+        <!-- SAMOCHÓD 2 -->
+
+        <div
+            class="car"
+            data-type="car"
+            data-id="car-2"
+        >
+            🚙
+        </div>
+
+
+        <!-- NOWE: ELEKTROWNIA -->
+
+        <div
+            class="building power-plant"
+            data-type="power-plant"
+            data-id="power-plant-1"
+        >
+            ⚡
+        </div>
+
+
+        <!-- NOWE: RECYKLING -->
+
+        <div
+            class="building recycling"
+            data-type="recycling"
+            data-id="recycling-1"
+        >
+            ♻️
+        </div>
+
+
+        <!-- NOWE: ZAJEZDNIA -->
+
+        <div
+            class="building bus-depot"
+            data-type="bus"
+            data-id="bus-1"
+        >
+            🚌
+        </div>
+
+
+        <!-- NOWE: SZPITAL -->
+
+        <div
+            class="building hospital"
+            data-type="hospital"
+            data-id="hospital-1"
+        >
+            🏥
+        </div>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- PANEL INFORMACJI -->
+    <!-- ========================= -->
+
+    <div
+        id="info-panel"
+        class="info-panel"
+    >
+
+        <h2>
+            🏙️ Miasto
+        </h2>
+
+        <p>
+            Kliknij obiekt, aby zobaczyć informacje.
+        </p>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- STATYSTYKI -->
+    <!-- ========================= -->
+
+    <div class="city-stats">
+
+
+        <div>
+
+            🌫️ Poziom CO₂
+
+            <strong id="co2">
+                75%
+            </strong>
 
         </div>
 
 
-        <!-- INFORMACJE O OBIEKCIE -->
+        <div>
 
-        <div id="info-panel" class="info-panel">
+            🌱 Czystość
 
-            <h2>🏭 Fabryka</h2>
-
-            <p>
-                Kliknij obiekt w mieście,
-                aby zobaczyć informacje.
-            </p>
+            <strong id="cleanliness">
+                40%
+            </strong>
 
         </div>
 
 
-        <!-- STATYSTYKI -->
+        <div>
 
-        <div class="city-stats">
+            😊 Zadowolenie
 
-            <div>
-                🌫️ Poziom CO₂
-                <strong id="co2">75%</strong>
-            </div>
-
-            <div>
-                🌱 Czystość
-                <strong id="cleanliness">40%</strong>
-            </div>
-
-            <div>
-                🏭 Fabryki
-                <strong id="factories">12</strong>
-            </div>
-
-            <div>
-                💰 Budżet
-                <strong id="budget">1000 $</strong>
-            </div>
+            <strong id="satisfaction">
+                60%
+            </strong>
 
         </div>
 
 
-        <!-- PASEK ZANIECZYSZCZENIA -->
+        <div>
 
-        <div class="pollution-bar-container">
+            🏭 Fabryki
 
-            <div class="pollution-info">
-
-                <span>🌫️ Zanieczyszczenie</span>
-
-                <strong id="pollution-value">
-                    75%
-                </strong>
-
-            </div>
-
-            <div class="pollution-bar">
-
-                <div id="pollution-fill"></div>
-
-            </div>
+            <strong id="factories">
+                2
+            </strong>
 
         </div>
 
 
-        <!-- STARY PRZYCISK TESTOWY -->
+        <div>
 
-        <button id="reduce-emission">
-            🌱 Zmniejsz emisję
+            💰 Budżet
+
+            <strong id="budget">
+                1000 $
+            </strong>
+
+        </div>
+
+
+        <div>
+
+            📅 Tura
+
+            <strong id="turn">
+                1
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- PASEK CO2 -->
+    <!-- ========================= -->
+
+    <div class="pollution-bar-container">
+
+        <div class="pollution-info">
+
+            <span>
+                🌫️ Zanieczyszczenie
+            </span>
+
+            <strong id="pollution-value">
+                75%
+            </strong>
+
+        </div>
+
+
+        <div class="pollution-bar">
+
+            <div
+                id="pollution-fill"
+            ></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- PRZYCISKI -->
+    <!-- ========================= -->
+
+    <div class="main-buttons">
+
+        <button
+            id="reset-budget"
+        >
+            🛠️ TEST — Resetuj grę
         </button>
 
 
-        <!-- TESTOWY RESET BUDŻETU -->
-
-        <button id="reset-budget">
-            🛠️ TEST — Przywróć 1000 $
+        <button
+            id="end-turn"
+        >
+            ⏭️ Zakończ turę
         </button>
 
-    </section>
+    </div>
+
+</section>
 
 </main>
 
@@ -145,4 +362,5 @@
 <script src="script.js"></script>
 
 </body>
+
 </html>
