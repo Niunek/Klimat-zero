@@ -3,20 +3,13 @@
    GŁÓWNY STYL
 ===================================== */
 
-
 * {
     box-sizing: border-box;
 }
 
-
 body {
-
     margin: 0;
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 
     background:
         linear-gradient(
@@ -27,9 +20,7 @@ body {
         );
 
     color: white;
-
     min-height: 100vh;
-
 }
 
 
@@ -38,59 +29,42 @@ body {
 ===================================== */
 
 header {
-
     height: 70px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
 
-    padding:
-        0 30px;
+    padding: 0 30px;
 
     background:
-        rgba(
-            10,
-            20,
-            30,
-            0.9
-        );
+        rgba(10, 20, 30, 0.9);
 
     border-bottom:
         1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.1
-        );
+        rgba(255, 255, 255, 0.1);
 
     position: sticky;
-
     top: 0;
-
     z-index: 10;
-
 }
-
 
 .logo {
-
     font-size: 24px;
-
     font-weight: bold;
-
 }
 
-
 .city-name {
-
     font-size: 17px;
-
     opacity: 0.9;
+    cursor: pointer;
 
+    transition: 0.2s;
+}
+
+.city-name:hover {
+    opacity: 1;
+    transform: scale(1.03);
 }
 
 
@@ -99,77 +73,77 @@ header {
 ===================================== */
 
 main {
-
     width: 100%;
 
     display: flex;
-
     justify-content: center;
 
     padding: 30px 15px 50px;
-
 }
 
-
 .city-panel {
-
     width: 100%;
-
     max-width: 1100px;
 
     background:
-        rgba(
-            255,
-            255,
-            255,
-            0.06
-        );
+        rgba(255, 255, 255, 0.06);
 
     border:
         1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.12
-        );
+        rgba(255, 255, 255, 0.12);
 
     border-radius: 24px;
 
     padding: 30px;
 
-    backdrop-filter:
-        blur(15px);
+    backdrop-filter: blur(15px);
 
     box-shadow:
         0 20px 60px
-        rgba(
-            0,
-            0,
-            0,
-            0.35
-        );
-
+        rgba(0, 0, 0, 0.35);
 }
 
 
-h1 {
+/* =====================================
+   INTRO
+===================================== */
 
+.city-intro h1 {
     margin-top: 0;
-
 }
 
-
-p {
-
+.city-intro p {
     color:
-        rgba(
-            255,
-            255,
-            255,
-            0.75
-        );
+        rgba(255, 255, 255, 0.75);
+}
 
+.city-name-editor {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+#city-name-input {
+    flex: 1;
+
+    padding: 14px 16px;
+
+    border: none;
+    outline: none;
+
+    border-radius: 12px;
+
+    background:
+        rgba(255, 255, 255, 0.1);
+
+    color: white;
+
+    font-size: 16px;
+}
+
+#city-name-input::placeholder {
+    color:
+        rgba(255, 255, 255, 0.5);
 }
 
 
@@ -178,17 +152,15 @@ p {
 ===================================== */
 
 .city-view {
-
     margin-top: 25px;
 
-    min-height: 330px;
+    min-height: 430px;
 
     padding: 30px;
 
     border-radius: 20px;
 
     background:
-
         linear-gradient(
             180deg,
             #315f43,
@@ -198,26 +170,16 @@ p {
     display: grid;
 
     grid-template-columns:
-        repeat(
-            7,
-            1fr
-        );
+        repeat(7, 1fr);
 
     gap: 20px;
 
     align-items: center;
-
     justify-items: center;
 
     border:
         2px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.08
-        );
-
+        rgba(255, 255, 255, 0.08);
 }
 
 
@@ -228,15 +190,11 @@ p {
 .building,
 .tree,
 .car {
-
     width: 72px;
-
     height: 72px;
 
     display: flex;
-
     justify-content: center;
-
     align-items: center;
 
     font-size: 45px;
@@ -244,12 +202,7 @@ p {
     border-radius: 18px;
 
     background:
-        rgba(
-            0,
-            0,
-            0,
-            0.18
-        );
+        rgba(0, 0, 0, 0.18);
 
     cursor: pointer;
 
@@ -259,35 +212,51 @@ p {
         box-shadow 0.2s;
 
     user-select: none;
-
 }
-
 
 .building:hover,
 .tree:hover,
 .car:hover {
-
     transform:
         translateY(-6px)
         scale(1.08);
 
     background:
-        rgba(
-            255,
-            255,
-            255,
-            0.12
-        );
+        rgba(255, 255, 255, 0.12);
 
     box-shadow:
         0 10px 25px
-        rgba(
-            0,
-            0,
-            0,
-            0.25
-        );
+        rgba(0, 0, 0, 0.25);
+}
 
+
+/* =====================================
+   TYPY OBIEKTÓW
+===================================== */
+
+.factory {
+    background:
+        rgba(255, 80, 80, 0.16);
+}
+
+.power-plant {
+    background:
+        rgba(255, 200, 60, 0.16);
+}
+
+.recycling {
+    background:
+        rgba(50, 200, 120, 0.16);
+}
+
+.bus-depot {
+    background:
+        rgba(50, 130, 255, 0.16);
+}
+
+.hospital {
+    background:
+        rgba(255, 100, 120, 0.16);
 }
 
 
@@ -296,7 +265,6 @@ p {
 ===================================== */
 
 .info-panel {
-
     margin-top: 25px;
 
     padding: 25px;
@@ -304,92 +272,21 @@ p {
     border-radius: 18px;
 
     background:
-        rgba(
-            0,
-            0,
-            0,
-            0.22
-        );
+        rgba(0, 0, 0, 0.22);
 
     min-height: 170px;
-
 }
-
 
 .info-panel h2 {
-
     margin-top: 0;
-
 }
-
 
 .info-panel strong {
-
     color: white;
-
 }
 
-
-/* =====================================
-   PRZYCISKI
-===================================== */
-
-button {
-
-    border: none;
-
-    border-radius: 12px;
-
-    padding:
-        12px 18px;
-
-    margin-top: 12px;
-
-    font-size: 15px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.12
-        );
-
-    color: white;
-
-    transition:
-        transform 0.15s,
-        background 0.15s;
-
-}
-
-
-button:hover:not(:disabled) {
-
-    transform:
-        translateY(-2px);
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.2
-        );
-
-}
-
-
-button:disabled {
-
-    cursor: not-allowed;
-
-    opacity: 0.55;
-
+.info-panel button {
+    margin-right: 8px;
 }
 
 
@@ -398,49 +295,32 @@ button:disabled {
 ===================================== */
 
 .city-stats {
-
     display: grid;
 
     grid-template-columns:
-        repeat(
-            3,
-            1fr
-        );
+        repeat(3, 1fr);
 
     gap: 15px;
 
     margin-top: 25px;
-
 }
 
-
 .city-stats div {
-
     padding: 18px;
 
     border-radius: 15px;
 
     background:
-        rgba(
-            255,
-            255,
-            255,
-            0.07
-        );
+        rgba(255, 255, 255, 0.07);
 
     display: flex;
-
     flex-direction: column;
 
     gap: 7px;
-
 }
 
-
 .city-stats strong {
-
     font-size: 22px;
-
 }
 
 
@@ -449,48 +329,30 @@ button:disabled {
 ===================================== */
 
 .pollution-bar-container {
-
     margin-top: 25px;
-
 }
 
-
 .pollution-info {
-
     display: flex;
-
     justify-content: space-between;
 
     margin-bottom: 8px;
-
 }
 
-
 .pollution-bar {
-
     height: 18px;
-
     width: 100%;
 
     background:
-        rgba(
-            255,
-            255,
-            255,
-            0.1
-        );
+        rgba(255, 255, 255, 0.1);
 
     border-radius: 20px;
 
     overflow: hidden;
-
 }
 
-
 #pollution-fill {
-
     height: 100%;
-
     width: 75%;
 
     background:
@@ -504,8 +366,104 @@ button:disabled {
     border-radius: 20px;
 
     transition:
-        width 0.4s;
+        width 0.4s ease;
+}
 
+
+/* =====================================
+   STATUS MIASTA
+===================================== */
+
+.city-status {
+    margin-top: 20px;
+
+    padding: 15px;
+
+    border-radius: 14px;
+
+    background:
+        rgba(255, 255, 255, 0.08);
+
+    text-align: center;
+
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+/* =====================================
+   STATUS TURY
+===================================== */
+
+.turn-status {
+    margin-top: 12px;
+
+    padding: 12px;
+
+    border-radius: 12px;
+
+    text-align: center;
+
+    background:
+        rgba(50, 210, 130, 0.12);
+}
+
+
+/* =====================================
+   PRZYCISKI
+===================================== */
+
+button {
+    border: none;
+
+    border-radius: 12px;
+
+    padding: 12px 18px;
+
+    margin-top: 12px;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    background:
+        rgba(255, 255, 255, 0.12);
+
+    color: white;
+
+    transition:
+        transform 0.15s,
+        background 0.15s;
+}
+
+button:hover:not(:disabled) {
+    transform:
+        translateY(-2px);
+
+    background:
+        rgba(255, 255, 255, 0.2);
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+}
+
+.upgrade-button {
+    background:
+        rgba(50, 210, 130, 0.2);
+}
+
+#reset-budget {
+    background:
+        rgba(255, 180, 50, 0.18);
+}
+
+#end-turn {
+    background:
+        rgba(80, 150, 255, 0.18);
 }
 
 
@@ -514,203 +472,86 @@ button:disabled {
 ===================================== */
 
 .main-buttons {
-
     display: flex;
-
     gap: 15px;
 
     margin-top: 25px;
-
-}
-
-
-#reset-budget {
-
-    background:
-        rgba(
-            255,
-            180,
-            50,
-            0.18
-        );
-
-}
-
-
-#end-turn {
-
-    background:
-        rgba(
-            80,
-            150,
-            255,
-            0.18
-        );
-
 }
 
 
 /* =====================================
-   NOWE OBIEKTY
+   RESPONSIVE
 ===================================== */
 
-.power-plant {
-
-    background:
-        rgba(
-            255,
-            200,
-            60,
-            0.12
-        );
-
-}
-
-
-.recycling {
-
-    background:
-        rgba(
-            50,
-            200,
-            120,
-            0.12
-        );
-
-}
-
-
-.bus-depot {
-
-    background:
-        rgba(
-            50,
-            130,
-            255,
-            0.12
-        );
-
-}
-
-
-.hospital {
-
-    background:
-        rgba(
-            255,
-            100,
-            120,
-            0.12
-        );
-
-}
-
-
-/* =====================================
-   TELEFON
-===================================== */
-
-@media (
-    max-width: 800px
-) {
+@media (max-width: 900px) {
 
     .city-view {
-
         grid-template-columns:
-            repeat(
-                4,
-                1fr
-            );
-
+            repeat(5, 1fr);
     }
-
-
-    .city-stats {
-
-        grid-template-columns:
-            repeat(
-                2,
-                1fr
-            );
-
-    }
-
 }
 
-
-@media (
-    max-width: 500px
-) {
+@media (max-width: 700px) {
 
     header {
-
-        padding:
-            0 15px;
-
+        padding: 0 15px;
     }
-
-
-    .logo {
-
-        font-size: 18px;
-
-    }
-
-
-    .city-name {
-
-        font-size: 14px;
-
-    }
-
 
     .city-panel {
-
-        padding: 18px;
-
+        padding: 20px;
     }
-
 
     .city-view {
-
         grid-template-columns:
-            repeat(
-                3,
-                1fr
-            );
+            repeat(4, 1fr);
 
-        padding: 18px;
-
-        gap: 12px;
-
+        gap: 14px;
+        padding: 20px;
     }
 
+    .city-stats {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .city-name-editor {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .logo {
+        font-size: 18px;
+    }
+
+    .city-name {
+        font-size: 14px;
+    }
+
+    .city-view {
+        grid-template-columns:
+            repeat(3, 1fr);
+
+        padding: 15px;
+        gap: 10px;
+    }
 
     .building,
     .tree,
     .car {
-
         width: 60px;
-
         height: 60px;
 
         font-size: 35px;
-
     }
-
 
     .city-stats {
-
         grid-template-columns:
             1fr;
-
     }
-
 
     .main-buttons {
-
         flex-direction: column;
-
     }
-
 }
