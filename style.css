@@ -46,6 +46,7 @@ header {
 
     position: sticky;
     top: 0;
+
     z-index: 10;
 }
 
@@ -57,6 +58,7 @@ header {
 .city-name {
     font-size: 17px;
     opacity: 0.9;
+
     cursor: pointer;
 
     transition: 0.2s;
@@ -64,7 +66,9 @@ header {
 
 .city-name:hover {
     opacity: 1;
-    transform: scale(1.03);
+
+    transform:
+        scale(1.03);
 }
 
 
@@ -78,7 +82,10 @@ main {
     display: flex;
     justify-content: center;
 
-    padding: 30px 15px 50px;
+    padding:
+        30px
+        15px
+        50px;
 }
 
 .city-panel {
@@ -119,14 +126,18 @@ main {
 
 .city-name-editor {
     display: flex;
+
     gap: 10px;
+
     margin-top: 15px;
 }
 
 #city-name-input {
     flex: 1;
 
-    padding: 14px 16px;
+    padding:
+        14px
+        16px;
 
     border: none;
     outline: none;
@@ -231,7 +242,7 @@ main {
 
 
 /* =====================================
-   TYPY OBIEKTÓW
+   FABRYKI
 ===================================== */
 
 .factory {
@@ -239,24 +250,77 @@ main {
         rgba(255, 80, 80, 0.16);
 }
 
+
+/* =====================================
+   ELEKTROWNIA
+===================================== */
+
 .power-plant {
     background:
-        rgba(255, 200, 60, 0.16);
+        rgba(255, 200, 60, 0.18);
+
+    box-shadow:
+        0 0 15px
+        rgba(255, 200, 60, 0.08);
 }
+
+.power-plant:hover {
+    background:
+        rgba(255, 200, 60, 0.28);
+
+    box-shadow:
+        0 0 25px
+        rgba(255, 200, 60, 0.2);
+}
+
+
+/* =====================================
+   RECYKLING
+===================================== */
 
 .recycling {
     background:
         rgba(50, 200, 120, 0.16);
 }
 
+
+/* =====================================
+   AUTOBUSY
+===================================== */
+
 .bus-depot {
     background:
         rgba(50, 130, 255, 0.16);
 }
 
+
+/* =====================================
+   SZPITAL
+===================================== */
+
 .hospital {
     background:
         rgba(255, 100, 120, 0.16);
+}
+
+
+/* =====================================
+   PARKI
+===================================== */
+
+.tree {
+    background:
+        rgba(50, 180, 90, 0.14);
+}
+
+
+/* =====================================
+   SAMOCHODY
+===================================== */
+
+.car {
+    background:
+        rgba(80, 130, 180, 0.14);
 }
 
 
@@ -281,12 +345,35 @@ main {
     margin-top: 0;
 }
 
+.info-panel p {
+    line-height: 1.5;
+}
+
 .info-panel strong {
     color: white;
 }
 
 .info-panel button {
     margin-right: 8px;
+}
+
+
+/* =====================================
+   PRZYCISK ULEPSZENIA
+===================================== */
+
+.upgrade-button {
+    background:
+        rgba(50, 210, 130, 0.2);
+
+    border:
+        1px solid
+        rgba(50, 210, 130, 0.2);
+}
+
+.upgrade-button:hover:not(:disabled) {
+    background:
+        rgba(50, 210, 130, 0.35);
 }
 
 
@@ -314,9 +401,22 @@ main {
         rgba(255, 255, 255, 0.07);
 
     display: flex;
+
     flex-direction: column;
 
     gap: 7px;
+
+    transition:
+        transform 0.2s,
+        background 0.2s;
+}
+
+.city-stats div:hover {
+    transform:
+        translateY(-3px);
+
+    background:
+        rgba(255, 255, 255, 0.1);
 }
 
 .city-stats strong {
@@ -334,6 +434,7 @@ main {
 
 .pollution-info {
     display: flex;
+
     justify-content: space-between;
 
     margin-bottom: 8px;
@@ -341,6 +442,7 @@ main {
 
 .pollution-bar {
     height: 18px;
+
     width: 100%;
 
     background:
@@ -353,6 +455,7 @@ main {
 
 #pollution-fill {
     height: 100%;
+
     width: 75%;
 
     background:
@@ -387,6 +490,7 @@ main {
     text-align: center;
 
     font-size: 20px;
+
     font-weight: bold;
 }
 
@@ -418,7 +522,9 @@ button {
 
     border-radius: 12px;
 
-    padding: 12px 18px;
+    padding:
+        12px
+        18px;
 
     margin-top: 12px;
 
@@ -448,22 +554,38 @@ button:hover:not(:disabled) {
 
 button:disabled {
     cursor: not-allowed;
+
     opacity: 0.55;
 }
 
-.upgrade-button {
-    background:
-        rgba(50, 210, 130, 0.2);
-}
+
+/* =====================================
+   RESET
+===================================== */
 
 #reset-budget {
     background:
         rgba(255, 180, 50, 0.18);
 }
 
+#reset-budget:hover {
+    background:
+        rgba(255, 180, 50, 0.3);
+}
+
+
+/* =====================================
+   ZAKOŃCZENIE TURY
+===================================== */
+
 #end-turn {
     background:
         rgba(80, 150, 255, 0.18);
+}
+
+#end-turn:hover {
+    background:
+        rgba(80, 150, 255, 0.3);
 }
 
 
@@ -473,9 +595,28 @@ button:disabled {
 
 .main-buttons {
     display: flex;
+
     gap: 15px;
 
     margin-top: 25px;
+}
+
+
+/* =====================================
+   KOMUNIKAT KRYTYCZNY
+===================================== */
+
+.critical-message {
+    padding: 12px;
+
+    border-radius: 12px;
+
+    background:
+        rgba(255, 70, 70, 0.12);
+
+    border:
+        1px solid
+        rgba(255, 70, 70, 0.2);
 }
 
 
@@ -489,7 +630,9 @@ button:disabled {
         grid-template-columns:
             repeat(5, 1fr);
     }
+
 }
+
 
 @media (max-width: 700px) {
 
@@ -506,6 +649,7 @@ button:disabled {
             repeat(4, 1fr);
 
         gap: 14px;
+
         padding: 20px;
     }
 
@@ -517,7 +661,9 @@ button:disabled {
     .city-name-editor {
         flex-direction: column;
     }
+
 }
+
 
 @media (max-width: 500px) {
 
@@ -534,6 +680,7 @@ button:disabled {
             repeat(3, 1fr);
 
         padding: 15px;
+
         gap: 10px;
     }
 
@@ -554,4 +701,5 @@ button:disabled {
     .main-buttons {
         flex-direction: column;
     }
+
 }

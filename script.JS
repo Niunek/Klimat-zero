@@ -1,6 +1,6 @@
 // =====================================================
 // CLIMATE: ZERO
-// GOTOWA WERSJA
+// DZIEŃ 23.08 — ELEKTROWNIE ⚡
 // =====================================================
 
 
@@ -57,7 +57,19 @@ let factories = {
 };
 
 let houseLevel = 0;
+
+
+// =====================================================
+// ELEKTROWNIA ⚡
+// =====================================================
+
 let powerPlantLevel = 0;
+
+
+// =====================================================
+// NOWE BUDYNKI
+// =====================================================
+
 let recyclingLevel = 0;
 let busLevel = 0;
 let hospitalLevel = 0;
@@ -124,6 +136,7 @@ function updateCityName() {
             cityName;
 
     }
+
 }
 
 
@@ -136,7 +149,10 @@ function changeCityName() {
     const newName =
         cityNameInput
             ? cityNameInput.value
-            : prompt("🏙️ Podaj nową nazwę miasta:");
+            : prompt(
+                "🏙️ Podaj nową nazwę miasta:",
+                cityName
+            );
 
     if (newName === null) {
         return;
@@ -177,10 +193,14 @@ function changeCityName() {
             ✅ Nazwa miasta została zmieniona.
         </p>
     `;
+
 }
 
 
-// Kliknięcie nazwy miasta
+// =====================================================
+// KLIKNIĘCIE NAZWY MIASTA
+// =====================================================
+
 if (cityNameDisplay) {
 
     cityNameDisplay.addEventListener(
@@ -190,43 +210,34 @@ if (cityNameDisplay) {
             if (cityNameInput) {
 
                 cityNameInput.focus();
-
                 cityNameInput.select();
 
-            } else {
-
-                const newName =
-                    prompt(
-                        "🏙️ Podaj nową nazwę miasta:",
-                        cityName
-                    );
-
-                if (newName !== null) {
-
-                    cityName =
-                        newName.trim() || cityName;
-
-                    updateCityName();
-
-                    saveGame();
-                }
             }
+
         }
     );
+
 }
 
 
-// Przycisk zapisu nazwy
+// =====================================================
+// ZAPIS NAZWY
+// =====================================================
+
 if (saveCityNameButton) {
 
     saveCityNameButton.addEventListener(
         "click",
         changeCityName
     );
+
 }
 
 
-// Enter w polu nazwy
+// =====================================================
+// ENTER W NAZWIE
+// =====================================================
+
 if (cityNameInput) {
 
     cityNameInput.addEventListener(
@@ -241,6 +252,7 @@ if (cityNameInput) {
 
         }
     );
+
 }
 
 
@@ -294,8 +306,12 @@ function updateStats() {
     const factoryCount =
         Object.values(factories)
             .reduce(
-                (sum, level) =>
-                    sum + (level > 0 ? 1 : 0),
+                function(sum, level) {
+
+                    return sum +
+                        (level > 0 ? 1 : 0);
+
+                },
                 0
             );
 
@@ -310,11 +326,12 @@ function updateStats() {
     updateTurnStatus();
 
     updateCityName();
+
 }
 
 
 // =====================================================
-// PASEK CO2
+// PASEK CO₂
 // =====================================================
 
 function updatePollutionBar() {
@@ -342,6 +359,7 @@ function updatePollutionBar() {
             co2 + "%";
 
     }
+
 }
 
 
@@ -391,8 +409,13 @@ function getCityStatus() {
         name: "ŚWIETNY",
         emoji: "🔵"
     };
+
 }
 
+
+// =====================================================
+// AKTUALIZACJA STATUSU
+// =====================================================
 
 function updateCityStatus() {
 
@@ -410,6 +433,7 @@ function updateCityStatus() {
 
     element.textContent =
         `${status.emoji} ${status.name}`;
+
 }
 
 
@@ -443,11 +467,12 @@ function updateTurnStatus() {
 
     element.textContent =
         "🟢 Możesz zakończyć turę.";
+
 }
 
 
 // =====================================================
-// CENA
+// CENA ULEPSZENIA
 // =====================================================
 
 function getCost(start, level) {
@@ -475,6 +500,7 @@ function getRemainingCooldown(id) {
         0,
         remaining
     );
+
 }
 
 
@@ -511,6 +537,7 @@ function upgradeButton(
                 ⏳ Dostępne za ${seconds}s
             </button>
         `;
+
     }
 
     return `
@@ -522,6 +549,7 @@ function upgradeButton(
             🔧 Ulepsz — ${cost} $
         </button>
     `;
+
 }
 
 
@@ -569,6 +597,7 @@ function showChemicalFactory() {
             cost
         )}
     `;
+
 }
 
 
@@ -616,6 +645,7 @@ function showIndustrialFactory() {
             cost
         )}
     `;
+
 }
 
 
@@ -634,7 +664,9 @@ function showOffice(id) {
     infoPanel.innerHTML = `
         <h2>🏢 Biurowiec</h2>
 
-        <p>🆔 ${id}</p>
+        <p>
+            🆔 ${id}
+        </p>
 
         <p>
             👥 Pracownicy:
@@ -659,6 +691,7 @@ function showOffice(id) {
             cost
         )}
     `;
+
 }
 
 
@@ -699,6 +732,7 @@ function showHouse() {
             cost
         )}
     `;
+
 }
 
 
@@ -717,16 +751,22 @@ function showPark(id) {
     infoPanel.innerHTML = `
         <h2>🌳 Park miejski</h2>
 
-        <p>🆔 ${id}</p>
+        <p>
+            🆔 ${id}
+        </p>
 
         <p>
             🌱 Wpływ na czystość:
-            <strong>+${5 + level * 3}%</strong>
+            <strong>
+                +${5 + level * 3}%
+            </strong>
         </p>
 
         <p>
             👥 Odwiedzający:
-            <strong>${120 + level * 20} dziennie</strong>
+            <strong>
+                ${120 + level * 20} dziennie
+            </strong>
         </p>
 
         <p>
@@ -740,6 +780,7 @@ function showPark(id) {
             cost
         )}
     `;
+
 }
 
 
@@ -758,11 +799,15 @@ function showCar(id) {
     infoPanel.innerHTML = `
         <h2>🚗 Ruch drogowy</h2>
 
-        <p>🆔 ${id}</p>
+        <p>
+            🆔 ${id}
+        </p>
 
         <p>
             🌫️ Wpływ na CO₂:
-            <strong>${Math.max(0, 3 - level)}%</strong>
+            <strong>
+                ${Math.max(0, 3 - level)}%
+            </strong>
         </p>
 
         <p>
@@ -776,11 +821,12 @@ function showCar(id) {
             cost
         )}
     `;
+
 }
 
 
 // =====================================================
-// ELEKTROWNIA
+// ⚡ ELEKTROWNIA WĘGLOWA
 // =====================================================
 
 function showPowerPlant() {
@@ -788,43 +834,65 @@ function showPowerPlant() {
     const id =
         "power-plant-1";
 
+    const level =
+        powerPlantLevel;
+
     const cost =
         getCost(
             400,
-            powerPlantLevel
+            level
         );
 
-    const energyTypes = [
-        "Węglowa",
-        "Gazowa",
-        "Słoneczna",
-        "Zielona"
-    ];
 
-    const energy =
-        energyTypes[
-            Math.min(
-                powerPlantLevel,
-                energyTypes.length - 1
-            )
-        ];
+    // Produkcja energii
+    const production =
+        50 + level * 20;
+
+
+    // Emisja elektrowni
+    const emission =
+        Math.max(
+            4,
+            12 - level * 2
+        );
+
 
     infoPanel.innerHTML = `
-        <h2>⚡ Elektrownia</h2>
+        <h2>⚡ Elektrownia węglowa</h2>
 
         <p>
-            Energia:
-            <strong>${energy}</strong>
+            🏭 Typ:
+            <strong>Elektrownia węglowa</strong>
         </p>
 
         <p>
-            🌫️ Wpływ na CO₂:
-            <strong>-${powerPlantLevel * 3}%</strong>
+            ⚡ Produkcja energii:
+            <strong>${production} MW</strong>
+        </p>
+
+        <p>
+            🌫️ Emisja CO₂:
+            <strong>${emission}%</strong>
+        </p>
+
+        <p>
+            🌱 Wpływ na czystość:
+            <strong>+${2 + level}%</strong>
+        </p>
+
+        <p>
+            😊 Wpływ na zadowolenie:
+            <strong>+${2 + level}%</strong>
         </p>
 
         <p>
             ⭐ Poziom:
-            <strong>${powerPlantLevel}</strong>
+            <strong>${level}</strong>
+        </p>
+
+        <p>
+            💰 Koszt modernizacji:
+            <strong>${cost} $</strong>
         </p>
 
         ${upgradeButton(
@@ -833,11 +901,12 @@ function showPowerPlant() {
             cost
         )}
     `;
+
 }
 
 
 // =====================================================
-// RECYKLING
+// ♻️ RECYKLING
 // =====================================================
 
 function showRecycling() {
@@ -879,11 +948,12 @@ function showRecycling() {
             cost
         )}
     `;
+
 }
 
 
 // =====================================================
-// AUTOBUSY
+// 🚌 AUTOBUSY
 // =====================================================
 
 function showBus() {
@@ -902,12 +972,16 @@ function showBus() {
 
         <p>
             🌫️ CO₂:
-            <strong>-${4 + busLevel * 2}%</strong>
+            <strong>
+                -${4 + busLevel * 2}%
+            </strong>
         </p>
 
         <p>
             😊 Zadowolenie:
-            <strong>+${3 + busLevel}%</strong>
+            <strong>
+                +${3 + busLevel}%
+            </strong>
         </p>
 
         <p>
@@ -921,11 +995,12 @@ function showBus() {
             cost
         )}
     `;
+
 }
 
 
 // =====================================================
-// SZPITAL
+// 🏥 SZPITAL
 // =====================================================
 
 function showHospital() {
@@ -960,6 +1035,7 @@ function showHospital() {
             cost
         )}
     `;
+
 }
 
 
@@ -968,63 +1044,110 @@ function showHospital() {
 // =====================================================
 
 document
-    .querySelectorAll(".city-view [data-type]")
-    .forEach(function(object) {
+    .querySelectorAll(
+        ".city-view [data-type]"
+    )
+    .forEach(
+        function(object) {
 
-        object.addEventListener(
-            "click",
-            function() {
+            object.addEventListener(
+                "click",
+                function() {
 
-                const type =
-                    object.dataset.type;
+                    const type =
+                        object.dataset.type;
 
-                const id =
-                    object.dataset.id;
+                    const id =
+                        object.dataset.id;
 
-                if (type === "chemical-factory") {
-                    showChemicalFactory();
+
+                    if (
+                        type ===
+                        "chemical-factory"
+                    ) {
+
+                        showChemicalFactory();
+
+                    }
+
+                    else if (
+                        type ===
+                        "industrial-factory"
+                    ) {
+
+                        showIndustrialFactory();
+
+                    }
+
+                    else if (
+                        type === "office"
+                    ) {
+
+                        showOffice(id);
+
+                    }
+
+                    else if (
+                        type === "house"
+                    ) {
+
+                        showHouse();
+
+                    }
+
+                    else if (
+                        type === "park"
+                    ) {
+
+                        showPark(id);
+
+                    }
+
+                    else if (
+                        type === "car"
+                    ) {
+
+                        showCar(id);
+
+                    }
+
+                    else if (
+                        type === "power-plant"
+                    ) {
+
+                        showPowerPlant();
+
+                    }
+
+                    else if (
+                        type === "recycling"
+                    ) {
+
+                        showRecycling();
+
+                    }
+
+                    else if (
+                        type === "bus"
+                    ) {
+
+                        showBus();
+
+                    }
+
+                    else if (
+                        type === "hospital"
+                    ) {
+
+                        showHospital();
+
+                    }
+
                 }
+            );
 
-                else if (type === "industrial-factory") {
-                    showIndustrialFactory();
-                }
-
-                else if (type === "office") {
-                    showOffice(id);
-                }
-
-                else if (type === "house") {
-                    showHouse();
-                }
-
-                else if (type === "park") {
-                    showPark(id);
-                }
-
-                else if (type === "car") {
-                    showCar(id);
-                }
-
-                else if (type === "power-plant") {
-                    showPowerPlant();
-                }
-
-                else if (type === "recycling") {
-                    showRecycling();
-                }
-
-                else if (type === "bus") {
-                    showBus();
-                }
-
-                else if (type === "hospital") {
-                    showHospital();
-                }
-
-            }
-        );
-
-    });
+        }
+    );
 
 
 // =====================================================
@@ -1044,6 +1167,7 @@ infoPanel.addEventListener(
             return;
         }
 
+
         const action =
             button.dataset.action;
 
@@ -1051,16 +1175,18 @@ infoPanel.addEventListener(
             button.dataset.id;
 
 
-        // Sprawdzenie cooldownu
-        if (getRemainingCooldown(id) > 0) {
+        if (
+            getRemainingCooldown(id) > 0
+        ) {
 
             return;
+
         }
 
 
-        // =============================================
+        // =================================================
         // FABRYKA CHEMICZNA
-        // =============================================
+        // =================================================
 
         if (action === "chemical") {
 
@@ -1082,7 +1208,9 @@ infoPanel.addEventListener(
             budget -= cost;
 
             co2 -= 5;
+
             cleanliness += 5;
+
             satisfaction += 2;
 
             factories[id]++;
@@ -1090,17 +1218,19 @@ infoPanel.addEventListener(
             startCooldown(id);
 
             updateStats();
+
             saveGame();
 
             showChemicalFactory();
 
             return;
+
         }
 
 
-        // =============================================
+        // =================================================
         // FABRYKA PRZEMYSŁOWA
-        // =============================================
+        // =================================================
 
         if (action === "industrial") {
 
@@ -1122,7 +1252,9 @@ infoPanel.addEventListener(
             budget -= cost;
 
             co2 -= 6;
+
             cleanliness += 5;
+
             satisfaction += 2;
 
             factories[id]++;
@@ -1130,17 +1262,19 @@ infoPanel.addEventListener(
             startCooldown(id);
 
             updateStats();
+
             saveGame();
 
             showIndustrialFactory();
 
             return;
+
         }
 
 
-        // =============================================
+        // =================================================
         // BIUROWIEC
-        // =============================================
+        // =================================================
 
         if (action === "office") {
 
@@ -1162,7 +1296,9 @@ infoPanel.addEventListener(
             budget -= cost;
 
             co2 -= 2;
+
             cleanliness += 1;
+
             satisfaction += 2;
 
             offices[id]++;
@@ -1170,22 +1306,27 @@ infoPanel.addEventListener(
             startCooldown(id);
 
             updateStats();
+
             saveGame();
 
             showOffice(id);
 
             return;
+
         }
 
 
-        // =============================================
+        // =================================================
         // DOM
-        // =============================================
+        // =================================================
 
         if (action === "house") {
 
             const cost =
-                getCost(150, houseLevel);
+                getCost(
+                    150,
+                    houseLevel
+                );
 
             if (budget < cost) {
 
@@ -1199,25 +1340,31 @@ infoPanel.addEventListener(
             budget -= cost;
 
             co2 -= 3;
+
             cleanliness += 2;
+
             satisfaction += 3;
 
             houseLevel++;
 
-            startCooldown("house-1");
+            startCooldown(
+                "house-1"
+            );
 
             updateStats();
+
             saveGame();
 
             showHouse();
 
             return;
+
         }
 
 
-        // =============================================
+        // =================================================
         // PARK
-        // =============================================
+        // =================================================
 
         if (action === "park") {
 
@@ -1225,7 +1372,10 @@ infoPanel.addEventListener(
                 parks[id];
 
             const cost =
-                getCost(200, level);
+                getCost(
+                    200,
+                    level
+                );
 
             if (budget < cost) {
 
@@ -1251,17 +1401,19 @@ infoPanel.addEventListener(
             startCooldown(id);
 
             updateStats();
+
             saveGame();
 
             showPark(id);
 
             return;
+
         }
 
 
-        // =============================================
+        // =================================================
         // SAMOCHÓD
-        // =============================================
+        // =================================================
 
         if (action === "car") {
 
@@ -1269,7 +1421,10 @@ infoPanel.addEventListener(
                 cars[id];
 
             const cost =
-                getCost(250, level);
+                getCost(
+                    250,
+                    level
+                );
 
             if (budget < cost) {
 
@@ -1283,7 +1438,9 @@ infoPanel.addEventListener(
             budget -= cost;
 
             co2 -= 5;
+
             cleanliness += 2;
+
             satisfaction += 4;
 
             cars[id]++;
@@ -1291,17 +1448,19 @@ infoPanel.addEventListener(
             startCooldown(id);
 
             updateStats();
+
             saveGame();
 
             showCar(id);
 
             return;
+
         }
 
 
-        // =============================================
-        // ELEKTROWNIA
-        // =============================================
+        // =================================================
+        // ⚡ ELEKTROWNIA
+        // =================================================
 
         if (action === "power") {
 
@@ -1320,30 +1479,42 @@ infoPanel.addEventListener(
                 return;
             }
 
+
             budget -= cost;
 
+
+            // Modernizacja elektrowni
+            // zmniejsza emisję i poprawia miasto
+
             co2 -= 7;
+
             cleanliness += 4;
+
             satisfaction += 2;
 
+
             powerPlantLevel++;
+
 
             startCooldown(
                 "power-plant-1"
             );
 
+
             updateStats();
+
             saveGame();
 
             showPowerPlant();
 
             return;
+
         }
 
 
-        // =============================================
+        // =================================================
         // RECYKLING
-        // =============================================
+        // =================================================
 
         if (action === "recycling") {
 
@@ -1377,17 +1548,19 @@ infoPanel.addEventListener(
             );
 
             updateStats();
+
             saveGame();
 
             showRecycling();
 
             return;
+
         }
 
 
-        // =============================================
+        // =================================================
         // AUTOBUSY
-        // =============================================
+        // =================================================
 
         if (action === "bus") {
 
@@ -1421,17 +1594,19 @@ infoPanel.addEventListener(
             );
 
             updateStats();
+
             saveGame();
 
             showBus();
 
             return;
+
         }
 
 
-        // =============================================
+        // =================================================
         // SZPITAL
-        // =============================================
+        // =================================================
 
         if (action === "hospital") {
 
@@ -1463,11 +1638,13 @@ infoPanel.addEventListener(
             );
 
             updateStats();
+
             saveGame();
 
             showHospital();
 
             return;
+
         }
 
     }
@@ -1525,6 +1702,7 @@ if (endTurnButton) {
                 updateTurnStatus();
 
                 return;
+
             }
 
 
@@ -1554,6 +1732,7 @@ if (endTurnButton) {
             ) {
 
                 turnWarningShown = true;
+
 
                 infoPanel.innerHTML = `
                     <h2>⚠️ Zwolnij trochę!</h2>
@@ -1649,9 +1828,9 @@ if (endTurnButton) {
             }
 
 
-            // =============================================
+            // =================================================
             // DOCHÓD
-            // =============================================
+            // =================================================
 
             const status =
                 getCityStatus();
@@ -1659,85 +1838,83 @@ if (endTurnButton) {
             let income = 0;
 
 
-            if (status.name === "KRYTYCZNY") {
+            if (
+                status.name === "KRYTYCZNY"
+            ) {
 
-                // 🔴 Stan krytyczny = ZAWSZE 0 $
+                // 🔴 KRYTYCZNY = ZERO DOCHODU
+
                 income = 0;
 
             }
 
-            else if (status.name === "ZŁY") {
+            else if (
+                status.name === "ZŁY"
+            ) {
 
-                income = 200;
-
-            }
-
-            else if (status.name === "ŚREDNI") {
-
-                income = 300;
+                income = 250;
 
             }
 
-            else if (status.name === "DOBRY") {
+            else if (
+                status.name === "ŚREDNI"
+            ) {
 
-                income = 400;
+                income = 350;
+
+            }
+
+            else if (
+                status.name === "DOBRY"
+            ) {
+
+                income = 450;
 
             }
 
             else {
 
-                income = 500;
+                income = 550;
 
             }
 
 
-            // =============================================
+            // =================================================
             // BONUS ZA ZADOWOLENIE
-            // =============================================
+            // =================================================
 
-            // Bonus dostajesz tylko jeśli miasto
-            // NIE jest w stanie krytycznym.
+            if (satisfaction >= 80) {
 
-            if (status.name !== "KRYTYCZNY") {
+                income += 100;
 
-                if (satisfaction >= 80) {
+            }
 
-                    income += 100;
+            else if (satisfaction >= 60) {
 
-                }
-
-                else if (satisfaction >= 60) {
-
-                    income += 50;
-
-                }
+                income += 50;
 
             }
 
 
-            // =============================================
-            // DODANIE DO BUDŻETU
-            // =============================================
+            // =================================================
+            // 💰 NAJWAŻNIEJSZA POPRAWKA
+            // =================================================
+
+            // Dochód faktycznie trafia do budżetu!
 
             budget += income;
 
 
-            // =============================================
+            // =================================================
             // NOWA TURA
-            // =============================================
-
-            turn++;
-
-            // =========================================
-            // NOWA TURA
-            // =========================================
+            // =================================================
 
             turn++;
 
 
-            // =========================================
+            // =================================================
             // NATURALNE POGARSZANIE
-            // =========================================
+            // =================================================
 
             co2 += 3;
 
@@ -1800,6 +1977,11 @@ if (endTurnButton) {
                 <p>
                     💰 Dochód:
                     <strong>+${income} $</strong>
+                </p>
+
+                <p>
+                    💵 Budżet:
+                    <strong>${budget} $</strong>
                 </p>
 
                 ${
@@ -1893,6 +2075,7 @@ if (resetButton) {
 
             houseLevel = 0;
 
+            // ⚡ RESET ELEKTROWNI
             powerPlantLevel = 0;
 
             recyclingLevel = 0;
@@ -1941,21 +2124,33 @@ function saveGame() {
         JSON.stringify({
 
             co2,
+
             cleanliness,
+
             satisfaction,
+
             budget,
+
             turn,
+
             cityName,
 
             offices,
+
             parks,
+
             cars,
+
             factories,
 
             houseLevel,
+
             powerPlantLevel,
+
             recyclingLevel,
+
             busLevel,
+
             hospitalLevel
 
         })
@@ -1981,6 +2176,7 @@ function loadGame() {
         updateStats();
 
         return;
+
     }
 
 
@@ -2046,8 +2242,12 @@ function loadGame() {
         houseLevel =
             game.houseLevel ?? 0;
 
+
+        // ⚡ WCZYTANIE ELEKTROWNI
+
         powerPlantLevel =
             game.powerPlantLevel ?? 0;
+
 
         recyclingLevel =
             game.recyclingLevel ?? 0;
@@ -2099,59 +2299,103 @@ setInterval(
             return;
         }
 
+
         const action =
             active.dataset.action;
 
         const id =
             active.dataset.id;
 
+
         if (!action || !id) {
             return;
         }
 
+
         const remaining =
             getRemainingCooldown(id);
 
+
         if (remaining <= 0) {
 
-            if (action === "chemical") {
+            if (
+                action === "chemical"
+            ) {
+
                 showChemicalFactory();
+
             }
 
-            else if (action === "industrial") {
+            else if (
+                action === "industrial"
+            ) {
+
                 showIndustrialFactory();
+
             }
 
-            else if (action === "office") {
+            else if (
+                action === "office"
+            ) {
+
                 showOffice(id);
+
             }
 
-            else if (action === "house") {
+            else if (
+                action === "house"
+            ) {
+
                 showHouse();
+
             }
 
-            else if (action === "park") {
+            else if (
+                action === "park"
+            ) {
+
                 showPark(id);
+
             }
 
-            else if (action === "car") {
+            else if (
+                action === "car"
+            ) {
+
                 showCar(id);
+
             }
 
-            else if (action === "power") {
+            else if (
+                action === "power"
+            ) {
+
                 showPowerPlant();
+
             }
 
-            else if (action === "recycling") {
+            else if (
+                action === "recycling"
+            ) {
+
                 showRecycling();
+
             }
 
-            else if (action === "bus") {
+            else if (
+                action === "bus"
+            ) {
+
                 showBus();
+
             }
 
-            else if (action === "hospital") {
+            else if (
+                action === "hospital"
+            ) {
+
                 showHospital();
+
             }
 
         }
