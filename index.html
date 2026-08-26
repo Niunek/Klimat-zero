@@ -3,14 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Climate: Zero</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <header>
-    <div class="logo">🌍 Climate: Zero</div>
+
+    <div class="logo">
+        🌍 Climate: Zero
+    </div>
 
     <div
         class="city-name"
@@ -19,11 +24,18 @@
     >
         🏙️ Moje miasto
     </div>
+
 </header>
+
 
 <main>
 
 <section class="city-panel">
+
+
+    <!-- ================================================= -->
+    <!-- INTRO -->
+    <!-- ================================================= -->
 
     <div class="city-intro">
 
@@ -53,106 +65,223 @@
     </div>
 
 
+    <!-- ================================================= -->
     <!-- MIASTO -->
+    <!-- ================================================= -->
 
     <div class="city-view">
 
-        <div class="building"
-             data-type="office"
-             data-id="office-1">🏢</div>
 
-        <div class="building factory"
-             data-type="chemical-factory"
-             data-id="factory-1">🏭</div>
+        <!-- BIUROWCE -->
 
-        <div class="building"
-             data-type="house"
-             data-id="house-1">🏠</div>
+        <div
+            class="building"
+            data-type="office"
+            data-id="office-1"
+            data-effect="⚡"
+            title="Biurowiec — zużywa energię"
+        >
+            🏢
+        </div>
 
-        <div class="building"
-             data-type="office"
-             data-id="office-2">🏢</div>
-
-        <div class="building factory"
-             data-type="industrial-factory"
-             data-id="factory-2">🏭</div>
-
-        <div class="tree"
-             data-type="park"
-             data-id="park-1">🌳</div>
-
-        <div class="tree"
-             data-type="park"
-             data-id="park-2">🌳</div>
-
-        <div class="tree"
-             data-type="park"
-             data-id="park-3">🌳</div>
-
-        <div class="car"
-             data-type="car"
-             data-id="car-1">🚗</div>
-
-        <div class="car"
-             data-type="car"
-             data-id="car-2">🚙</div>
+        <div
+            class="building"
+            data-type="office"
+            data-id="office-2"
+            data-effect="⚡"
+            title="Biurowiec — zużywa energię"
+        >
+            🏢
+        </div>
 
 
-        <!-- ELEKTROWNIE -->
+        <!-- FABRYKI -->
 
-        <div class="building power-plant coal-plant"
-             data-type="power-plant"
-             data-id="coal">
+        <div
+            class="building factory"
+            data-type="chemical-factory"
+            data-id="factory-1"
+            data-effect="🌫️"
+            title="Fabryka chemiczna — emituje CO₂"
+        >
             🏭
         </div>
 
-        <div class="building power-plant wind-plant"
-             data-type="power-plant"
-             data-id="wind">
+        <div
+            class="building factory"
+            data-type="industrial-factory"
+            data-id="factory-2"
+            data-effect="🌫️"
+            title="Fabryka przemysłowa — emituje CO₂"
+        >
+            🏭
+        </div>
+
+
+        <!-- DOM -->
+
+        <div
+            class="building"
+            data-type="house"
+            data-id="house-1"
+            data-effect="⚡"
+            title="Dom — zużywa energię"
+        >
+            🏠
+        </div>
+
+
+        <!-- PARKI -->
+
+        <div
+            class="tree"
+            data-type="park"
+            data-id="park-1"
+            data-effect="🌱"
+            title="Park — poprawia czystość"
+        >
+            🌳
+        </div>
+
+        <div
+            class="tree"
+            data-type="park"
+            data-id="park-2"
+            data-effect="🌱"
+            title="Park — poprawia czystość"
+        >
+            🌳
+        </div>
+
+        <div
+            class="tree"
+            data-type="park"
+            data-id="park-3"
+            data-effect="🌱"
+            title="Park — poprawia czystość"
+        >
+            🌳
+        </div>
+
+
+        <!-- SAMOCHODY -->
+
+        <div
+            class="car"
+            data-type="car"
+            data-id="car-1"
+            data-effect="🌫️"
+            title="Samochód — zwiększa CO₂"
+        >
+            🚗
+        </div>
+
+        <div
+            class="car"
+            data-type="car"
+            data-id="car-2"
+            data-effect="🌫️"
+            title="Samochód — zwiększa CO₂"
+        >
+            🚙
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- ELEKTROWNIE -->
+        <!-- ================================================= -->
+
+        <div
+            class="building power-plant coal-plant"
+            data-type="power-plant"
+            data-id="coal"
+            data-effect="⚡"
+            title="Elektrownia węglowa"
+        >
+            🏭
+        </div>
+
+        <div
+            class="building power-plant wind-plant"
+            data-type="power-plant"
+            data-id="wind"
+            data-effect="⚡"
+            title="Elektrownia wiatrowa"
+        >
             🌬️
         </div>
 
-        <div class="building power-plant water-plant"
-             data-type="power-plant"
-             data-id="water">
+        <div
+            class="building power-plant water-plant"
+            data-type="power-plant"
+            data-id="water"
+            data-effect="⚡"
+            title="Elektrownia wodna"
+        >
             💧
         </div>
 
-        <div class="building power-plant solar-plant"
-             data-type="power-plant"
-             data-id="solar">
+        <div
+            class="building power-plant solar-plant"
+            data-type="power-plant"
+            data-id="solar"
+            data-effect="⚡"
+            title="Elektrownia słoneczna"
+        >
             ☀️
         </div>
 
-        <div class="building power-plant nuclear-plant"
-             data-type="power-plant"
-             data-id="nuclear">
+        <div
+            class="building power-plant nuclear-plant"
+            data-type="power-plant"
+            data-id="nuclear"
+            data-effect="⚡"
+            title="Elektrownia jądrowa"
+        >
             ☢️
         </div>
 
 
-        <div class="building recycling"
-             data-type="recycling"
-             data-id="recycling-1">
+        <!-- ================================================= -->
+        <!-- INNE -->
+        <!-- ================================================= -->
+
+        <div
+            class="building recycling"
+            data-type="recycling"
+            data-id="recycling-1"
+            data-effect="🌱"
+            title="Centrum recyklingu — poprawia czystość"
+        >
             ♻️
         </div>
 
-        <div class="building bus-depot"
-             data-type="bus"
-             data-id="bus-1">
+        <div
+            class="building bus-depot"
+            data-type="bus"
+            data-id="bus-1"
+            data-effect="😊"
+            title="Zajezdnia autobusowa — poprawia zadowolenie"
+        >
             🚌
         </div>
 
-        <div class="building hospital"
-             data-type="hospital"
-             data-id="hospital-1">
+        <div
+            class="building hospital"
+            data-type="hospital"
+            data-id="hospital-1"
+            data-effect="😊"
+            title="Szpital — poprawia zadowolenie"
+        >
             🏥
         </div>
 
     </div>
 
 
+    <!-- ================================================= -->
     <!-- PANEL INFORMACJI -->
+    <!-- ================================================= -->
 
     <div id="info-panel" class="info-panel">
 
@@ -166,7 +295,9 @@
     </div>
 
 
+    <!-- ================================================= -->
     <!-- STATYSTYKI -->
+    <!-- ================================================= -->
 
     <div class="city-stats">
 
@@ -203,13 +334,17 @@
     </div>
 
 
+    <!-- ================================================= -->
     <!-- CO2 -->
+    <!-- ================================================= -->
 
     <div class="pollution-bar-container">
 
         <div class="pollution-info">
 
-            <span>🌫️ Zanieczyszczenie</span>
+            <span>
+                🌫️ Zanieczyszczenie
+            </span>
 
             <strong id="pollution-value">
                 75%
@@ -226,6 +361,8 @@
     </div>
 
 
+    <!-- STATUS -->
+
     <div
         id="city-status"
         class="city-status"
@@ -234,6 +371,8 @@
     </div>
 
 
+    <!-- STATUS TURY -->
+
     <div
         id="turn-status"
         class="turn-status"
@@ -241,6 +380,8 @@
         🟢 Możesz zakończyć turę.
     </div>
 
+
+    <!-- PRZYCISKI -->
 
     <div class="main-buttons">
 
@@ -257,6 +398,7 @@
 </section>
 
 </main>
+
 
 <script src="script.js"></script>
 

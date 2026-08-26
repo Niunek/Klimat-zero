@@ -9,7 +9,11 @@
 
 body {
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
 
     background:
         linear-gradient(
@@ -20,6 +24,7 @@ body {
         );
 
     color: white;
+
     min-height: 100vh;
 }
 
@@ -32,6 +37,7 @@ header {
     height: 70px;
 
     display: flex;
+
     align-items: center;
     justify-content: space-between;
 
@@ -45,23 +51,30 @@ header {
         rgba(255, 255, 255, 0.1);
 
     position: sticky;
+
     top: 0;
+
     z-index: 10;
 
-    backdrop-filter: blur(12px);
+    backdrop-filter:
+        blur(12px);
 }
 
 .logo {
     font-size: 24px;
+
     font-weight: bold;
 }
 
 .city-name {
     font-size: 17px;
+
     opacity: 0.9;
+
     cursor: pointer;
 
-    transition: 0.2s;
+    transition:
+        0.2s;
 }
 
 .city-name:hover {
@@ -80,6 +93,7 @@ main {
     width: 100%;
 
     display: flex;
+
     justify-content: center;
 
     padding:
@@ -90,6 +104,7 @@ main {
 
 .city-panel {
     width: 100%;
+
     max-width: 1100px;
 
     background:
@@ -103,7 +118,8 @@ main {
 
     padding: 30px;
 
-    backdrop-filter: blur(15px);
+    backdrop-filter:
+        blur(15px);
 
     box-shadow:
         0 20px 60px
@@ -126,7 +142,9 @@ main {
 
 .city-name-editor {
     display: flex;
+
     gap: 10px;
+
     margin-top: 15px;
 }
 
@@ -138,6 +156,7 @@ main {
         16px;
 
     border: none;
+
     outline: none;
 
     border-radius: 12px;
@@ -146,6 +165,7 @@ main {
         rgba(255, 255, 255, 0.1);
 
     color: white;
+
     font-size: 16px;
 }
 
@@ -183,6 +203,7 @@ main {
     gap: 20px;
 
     align-items: center;
+
     justify-items: center;
 
     border:
@@ -192,17 +213,20 @@ main {
 
 
 /* =====================================================
-   OBJECTS
+   OBIEKTY
 ===================================================== */
 
 .building,
 .tree,
 .car {
     width: 72px;
+
     height: 72px;
 
     display: flex;
+
     justify-content: center;
+
     align-items: center;
 
     font-size: 45px;
@@ -220,11 +244,89 @@ main {
         box-shadow 0.2s;
 
     user-select: none;
+
+    position: relative;
 }
+
+
+/* =====================================================
+   IKONKA EFEKTU W ROGU
+===================================================== */
+
+.building[data-effect]::after,
+.tree[data-effect]::after,
+.car[data-effect]::after {
+
+    content:
+        attr(data-effect);
+
+    position: absolute;
+
+    right: -5px;
+
+    bottom: -5px;
+
+    width: 27px;
+
+    height: 27px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 15px;
+
+    background:
+        rgba(10, 18, 28, 0.95);
+
+    border:
+        2px solid
+        rgba(255, 255, 255, 0.25);
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 4px 12px
+        rgba(0, 0, 0, 0.45);
+
+    z-index: 2;
+
+    pointer-events: none;
+
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+}
+
+
+/* =====================================================
+   EFEKT HOVER
+===================================================== */
+
+.building:hover::after,
+.tree:hover::after,
+.car:hover::after {
+
+    transform:
+        scale(1.15)
+        rotate(5deg);
+
+    box-shadow:
+        0 5px 15px
+        rgba(0, 0, 0, 0.6);
+}
+
+
+/* =====================================================
+   OBIEKTY — HOVER
+===================================================== */
 
 .building:hover,
 .tree:hover,
 .car:hover {
+
     transform:
         translateY(-6px)
         scale(1.08);
@@ -239,7 +341,7 @@ main {
 
 
 /* =====================================================
-   FACTORIES
+   FABRYKI
 ===================================================== */
 
 .factory {
@@ -249,10 +351,11 @@ main {
 
 
 /* =====================================================
-   POWER PLANTS
+   ELEKTROWNIE
 ===================================================== */
 
 .power-plant {
+
     position: relative;
 
     background:
@@ -264,6 +367,7 @@ main {
 }
 
 .power-plant:hover {
+
     background:
         rgba(255, 200, 60, 0.28);
 
@@ -299,7 +403,7 @@ main {
 
 
 /* =====================================================
-   OTHER OBJECTS
+   INNE OBIEKTY
 ===================================================== */
 
 .recycling {
@@ -333,6 +437,7 @@ main {
 ===================================================== */
 
 .info-panel {
+
     margin-top: 25px;
 
     padding: 25px;
@@ -363,6 +468,7 @@ main {
 ===================================================== */
 
 .energy-panel {
+
     margin-top: 20px;
 
     padding: 22px;
@@ -387,10 +493,12 @@ main {
 
 .energy-panel h3 {
     margin-top: 0;
+
     font-size: 22px;
 }
 
 .energy-row {
+
     margin-top: 18px;
 
     padding: 15px;
@@ -406,8 +514,11 @@ main {
 }
 
 .energy-row-top {
+
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
 
     margin-bottom: 10px;
@@ -418,25 +529,31 @@ main {
 }
 
 .energy-percent {
+
     font-size: 18px;
+
     font-weight: bold;
 }
 
 
 /* =====================================================
-   CUSTOM RANGE SLIDER
+   SUWAK
 ===================================================== */
 
 .energy-slider {
+
     width: 100%;
+
     height: 12px;
 
     appearance: none;
+
     -webkit-appearance: none;
 
     border-radius: 20px;
 
     outline: none;
+
     cursor: pointer;
 
     background:
@@ -453,10 +570,13 @@ main {
 }
 
 .energy-slider::-webkit-slider-thumb {
+
     appearance: none;
+
     -webkit-appearance: none;
 
     width: 24px;
+
     height: 24px;
 
     border-radius: 50%;
@@ -472,21 +592,12 @@ main {
         rgba(0, 0, 0, 0.45);
 
     cursor: grab;
-
-    transition: 0.15s;
-}
-
-.energy-slider::-webkit-slider-thumb:hover {
-    transform: scale(1.15);
-}
-
-.energy-slider::-webkit-slider-thumb:active {
-    cursor: grabbing;
-    transform: scale(1.25);
 }
 
 .energy-slider::-moz-range-thumb {
+
     width: 24px;
+
     height: 24px;
 
     border-radius: 50%;
@@ -496,15 +607,12 @@ main {
     border:
         3px solid
         #35d07f;
-
-    box-shadow:
-        0 3px 12px
-        rgba(0, 0, 0, 0.45);
 
     cursor: grab;
 }
 
 .energy-slider::-moz-range-track {
+
     height: 12px;
 
     border-radius: 20px;
@@ -519,7 +627,9 @@ main {
 }
 
 .energy-details {
+
     display: flex;
+
     justify-content: space-between;
 
     margin-top: 10px;
@@ -536,6 +646,7 @@ main {
 ===================================================== */
 
 .energy-summary {
+
     display: grid;
 
     grid-template-columns:
@@ -547,6 +658,7 @@ main {
 }
 
 .energy-summary div {
+
     padding: 14px;
 
     border-radius: 12px;
@@ -558,6 +670,7 @@ main {
 }
 
 .energy-summary strong {
+
     display: block;
 
     margin-top: 5px;
@@ -571,6 +684,7 @@ main {
 ===================================================== */
 
 .upgrade-button {
+
     background:
         rgba(50, 210, 130, 0.2);
 
@@ -580,16 +694,18 @@ main {
 }
 
 .upgrade-button:hover:not(:disabled) {
+
     background:
         rgba(50, 210, 130, 0.35);
 }
 
 
 /* =====================================================
-   STATS
+   STATYSTYKI
 ===================================================== */
 
 .city-stats {
+
     display: grid;
 
     grid-template-columns:
@@ -601,6 +717,7 @@ main {
 }
 
 .city-stats div {
+
     padding: 18px;
 
     border-radius: 15px;
@@ -620,6 +737,7 @@ main {
 }
 
 .city-stats div:hover {
+
     transform:
         translateY(-3px);
 
@@ -628,6 +746,7 @@ main {
 }
 
 .city-stats strong {
+
     font-size: 22px;
 }
 
@@ -641,14 +760,18 @@ main {
 }
 
 .pollution-info {
+
     display: flex;
+
     justify-content: space-between;
 
     margin-bottom: 8px;
 }
 
 .pollution-bar {
+
     height: 18px;
+
     width: 100%;
 
     background:
@@ -660,6 +783,7 @@ main {
 }
 
 #pollution-fill {
+
     height: 100%;
 
     width: 75%;
@@ -684,6 +808,7 @@ main {
 ===================================================== */
 
 .city-status {
+
     margin-top: 20px;
 
     padding: 15px;
@@ -696,10 +821,12 @@ main {
     text-align: center;
 
     font-size: 20px;
+
     font-weight: bold;
 }
 
 .turn-status {
+
     margin-top: 12px;
 
     padding: 12px;
@@ -718,6 +845,7 @@ main {
 ===================================================== */
 
 button {
+
     border: none;
 
     border-radius: 12px;
@@ -729,6 +857,7 @@ button {
     margin-top: 12px;
 
     font-size: 15px;
+
     font-weight: bold;
 
     cursor: pointer;
@@ -744,6 +873,7 @@ button {
 }
 
 button:hover:not(:disabled) {
+
     transform:
         translateY(-2px);
 
@@ -752,31 +882,38 @@ button:hover:not(:disabled) {
 }
 
 button:disabled {
+
     cursor: not-allowed;
+
     opacity: 0.55;
 }
 
 #reset-budget {
+
     background:
         rgba(255, 180, 50, 0.18);
 }
 
 #reset-budget:hover {
+
     background:
         rgba(255, 180, 50, 0.3);
 }
 
 #end-turn {
+
     background:
         rgba(80, 150, 255, 0.18);
 }
 
 #end-turn:hover {
+
     background:
         rgba(80, 150, 255, 0.3);
 }
 
 .main-buttons {
+
     display: flex;
 
     gap: 15px;
@@ -790,6 +927,7 @@ button:disabled {
 ===================================================== */
 
 .critical-message {
+
     padding: 12px;
 
     border-radius: 12px;
@@ -810,6 +948,7 @@ button:disabled {
 @media (max-width: 900px) {
 
     .city-view {
+
         grid-template-columns:
             repeat(5, 1fr);
     }
@@ -828,6 +967,7 @@ button:disabled {
     }
 
     .city-view {
+
         grid-template-columns:
             repeat(4, 1fr);
 
@@ -837,15 +977,18 @@ button:disabled {
     }
 
     .city-stats {
+
         grid-template-columns:
             repeat(2, 1fr);
     }
 
     .city-name-editor {
+
         flex-direction: column;
     }
 
     .energy-summary {
+
         grid-template-columns:
             1fr;
     }
@@ -864,6 +1007,7 @@ button:disabled {
     }
 
     .city-view {
+
         grid-template-columns:
             repeat(3, 1fr);
 
@@ -875,18 +1019,37 @@ button:disabled {
     .building,
     .tree,
     .car {
+
         width: 60px;
+
         height: 60px;
 
         font-size: 35px;
     }
 
+    .building[data-effect]::after,
+    .tree[data-effect]::after,
+    .car[data-effect]::after {
+
+        width: 23px;
+
+        height: 23px;
+
+        font-size: 13px;
+
+        right: -4px;
+
+        bottom: -4px;
+    }
+
     .city-stats {
+
         grid-template-columns:
             1fr;
     }
 
     .main-buttons {
+
         flex-direction: column;
     }
 
