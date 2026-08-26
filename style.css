@@ -1,7 +1,7 @@
-/* =====================================
+/* =====================================================
    CLIMATE: ZERO
    GŁÓWNY STYL
-===================================== */
+===================================================== */
 
 * {
     box-sizing: border-box;
@@ -24,9 +24,9 @@ body {
 }
 
 
-/* =====================================
-   GÓRNY PASEK
-===================================== */
+/* =====================================================
+   HEADER
+===================================================== */
 
 header {
     height: 70px;
@@ -46,8 +46,9 @@ header {
 
     position: sticky;
     top: 0;
-
     z-index: 10;
+
+    backdrop-filter: blur(12px);
 }
 
 .logo {
@@ -58,7 +59,6 @@ header {
 .city-name {
     font-size: 17px;
     opacity: 0.9;
-
     cursor: pointer;
 
     transition: 0.2s;
@@ -72,9 +72,9 @@ header {
 }
 
 
-/* =====================================
-   GŁÓWNY PANEL
-===================================== */
+/* =====================================================
+   MAIN
+===================================================== */
 
 main {
     width: 100%;
@@ -111,9 +111,9 @@ main {
 }
 
 
-/* =====================================
+/* =====================================================
    INTRO
-===================================== */
+===================================================== */
 
 .city-intro h1 {
     margin-top: 0;
@@ -126,9 +126,7 @@ main {
 
 .city-name-editor {
     display: flex;
-
     gap: 10px;
-
     margin-top: 15px;
 }
 
@@ -148,7 +146,6 @@ main {
         rgba(255, 255, 255, 0.1);
 
     color: white;
-
     font-size: 16px;
 }
 
@@ -158,14 +155,14 @@ main {
 }
 
 
-/* =====================================
-   WIDOK MIASTA
-===================================== */
+/* =====================================================
+   CITY VIEW
+===================================================== */
 
 .city-view {
     margin-top: 25px;
 
-    min-height: 430px;
+    min-height: 500px;
 
     padding: 30px;
 
@@ -194,9 +191,9 @@ main {
 }
 
 
-/* =====================================
-   OBIEKTY
-===================================== */
+/* =====================================================
+   OBJECTS
+===================================================== */
 
 .building,
 .tree,
@@ -241,9 +238,9 @@ main {
 }
 
 
-/* =====================================
-   FABRYKI
-===================================== */
+/* =====================================================
+   FACTORIES
+===================================================== */
 
 .factory {
     background:
@@ -251,11 +248,13 @@ main {
 }
 
 
-/* =====================================
-   ELEKTROWNIA
-===================================== */
+/* =====================================================
+   POWER PLANTS
+===================================================== */
 
 .power-plant {
+    position: relative;
+
     background:
         rgba(255, 200, 60, 0.18);
 
@@ -273,50 +272,55 @@ main {
         rgba(255, 200, 60, 0.2);
 }
 
+.coal-plant {
+    background:
+        rgba(100, 100, 100, 0.25);
+}
 
-/* =====================================
-   RECYKLING
-===================================== */
+.wind-plant {
+    background:
+        rgba(100, 180, 255, 0.18);
+}
+
+.water-plant {
+    background:
+        rgba(40, 150, 255, 0.2);
+}
+
+.solar-plant {
+    background:
+        rgba(255, 210, 50, 0.22);
+}
+
+.nuclear-plant {
+    background:
+        rgba(150, 100, 255, 0.2);
+}
+
+
+/* =====================================================
+   OTHER OBJECTS
+===================================================== */
 
 .recycling {
     background:
         rgba(50, 200, 120, 0.16);
 }
 
-
-/* =====================================
-   AUTOBUSY
-===================================== */
-
 .bus-depot {
     background:
         rgba(50, 130, 255, 0.16);
 }
-
-
-/* =====================================
-   SZPITAL
-===================================== */
 
 .hospital {
     background:
         rgba(255, 100, 120, 0.16);
 }
 
-
-/* =====================================
-   PARKI
-===================================== */
-
 .tree {
     background:
         rgba(50, 180, 90, 0.14);
 }
-
-
-/* =====================================
-   SAMOCHODY
-===================================== */
 
 .car {
     background:
@@ -324,9 +328,9 @@ main {
 }
 
 
-/* =====================================
-   PANEL INFORMACJI
-===================================== */
+/* =====================================================
+   INFO PANEL
+===================================================== */
 
 .info-panel {
     margin-top: 25px;
@@ -353,14 +357,218 @@ main {
     color: white;
 }
 
-.info-panel button {
-    margin-right: 8px;
+
+/* =====================================================
+   POWER MANAGEMENT PANEL
+===================================================== */
+
+.energy-panel {
+    margin-top: 20px;
+
+    padding: 22px;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(30, 40, 60, 0.95),
+            rgba(15, 25, 35, 0.95)
+        );
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.1);
+
+    box-shadow:
+        0 10px 35px
+        rgba(0, 0, 0, 0.25);
+}
+
+.energy-panel h3 {
+    margin-top: 0;
+    font-size: 22px;
+}
+
+.energy-row {
+    margin-top: 18px;
+
+    padding: 15px;
+
+    border-radius: 14px;
+
+    background:
+        rgba(255, 255, 255, 0.055);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.06);
+}
+
+.energy-row-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 10px;
+}
+
+.energy-name {
+    font-weight: bold;
+}
+
+.energy-percent {
+    font-size: 18px;
+    font-weight: bold;
 }
 
 
-/* =====================================
-   PRZYCISK ULEPSZENIA
-===================================== */
+/* =====================================================
+   CUSTOM RANGE SLIDER
+===================================================== */
+
+.energy-slider {
+    width: 100%;
+    height: 12px;
+
+    appearance: none;
+    -webkit-appearance: none;
+
+    border-radius: 20px;
+
+    outline: none;
+    cursor: pointer;
+
+    background:
+        linear-gradient(
+            90deg,
+            #35d07f 0%,
+            #ffd23f 60%,
+            #ff5a5f 100%
+        );
+
+    box-shadow:
+        0 0 12px
+        rgba(80, 220, 150, 0.18);
+}
+
+.energy-slider::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+
+    width: 24px;
+    height: 24px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    border:
+        3px solid
+        #35d07f;
+
+    box-shadow:
+        0 3px 12px
+        rgba(0, 0, 0, 0.45);
+
+    cursor: grab;
+
+    transition: 0.15s;
+}
+
+.energy-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+}
+
+.energy-slider::-webkit-slider-thumb:active {
+    cursor: grabbing;
+    transform: scale(1.25);
+}
+
+.energy-slider::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    border:
+        3px solid
+        #35d07f;
+
+    box-shadow:
+        0 3px 12px
+        rgba(0, 0, 0, 0.45);
+
+    cursor: grab;
+}
+
+.energy-slider::-moz-range-track {
+    height: 12px;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #35d07f,
+            #ffd23f,
+            #ff5a5f
+        );
+}
+
+.energy-details {
+    display: flex;
+    justify-content: space-between;
+
+    margin-top: 10px;
+
+    font-size: 13px;
+
+    color:
+        rgba(255, 255, 255, 0.65);
+}
+
+
+/* =====================================================
+   ENERGY SUMMARY
+===================================================== */
+
+.energy-summary {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 10px;
+
+    margin-top: 20px;
+}
+
+.energy-summary div {
+    padding: 14px;
+
+    border-radius: 12px;
+
+    background:
+        rgba(255, 255, 255, 0.06);
+
+    text-align: center;
+}
+
+.energy-summary strong {
+    display: block;
+
+    margin-top: 5px;
+
+    font-size: 20px;
+}
+
+
+/* =====================================================
+   UPGRADE
+===================================================== */
 
 .upgrade-button {
     background:
@@ -377,9 +585,9 @@ main {
 }
 
 
-/* =====================================
-   STATYSTYKI
-===================================== */
+/* =====================================================
+   STATS
+===================================================== */
 
 .city-stats {
     display: grid;
@@ -424,9 +632,9 @@ main {
 }
 
 
-/* =====================================
-   PASEK CO2
-===================================== */
+/* =====================================================
+   CO2 BAR
+===================================================== */
 
 .pollution-bar-container {
     margin-top: 25px;
@@ -434,7 +642,6 @@ main {
 
 .pollution-info {
     display: flex;
-
     justify-content: space-between;
 
     margin-bottom: 8px;
@@ -442,7 +649,6 @@ main {
 
 .pollution-bar {
     height: 18px;
-
     width: 100%;
 
     background:
@@ -473,9 +679,9 @@ main {
 }
 
 
-/* =====================================
-   STATUS MIASTA
-===================================== */
+/* =====================================================
+   STATUS
+===================================================== */
 
 .city-status {
     margin-top: 20px;
@@ -490,14 +696,8 @@ main {
     text-align: center;
 
     font-size: 20px;
-
     font-weight: bold;
 }
-
-
-/* =====================================
-   STATUS TURY
-===================================== */
 
 .turn-status {
     margin-top: 12px;
@@ -513,9 +713,9 @@ main {
 }
 
 
-/* =====================================
-   PRZYCISKI
-===================================== */
+/* =====================================================
+   BUTTONS
+===================================================== */
 
 button {
     border: none;
@@ -529,7 +729,6 @@ button {
     margin-top: 12px;
 
     font-size: 15px;
-
     font-weight: bold;
 
     cursor: pointer;
@@ -554,14 +753,8 @@ button:hover:not(:disabled) {
 
 button:disabled {
     cursor: not-allowed;
-
     opacity: 0.55;
 }
-
-
-/* =====================================
-   RESET
-===================================== */
 
 #reset-budget {
     background:
@@ -573,11 +766,6 @@ button:disabled {
         rgba(255, 180, 50, 0.3);
 }
 
-
-/* =====================================
-   ZAKOŃCZENIE TURY
-===================================== */
-
 #end-turn {
     background:
         rgba(80, 150, 255, 0.18);
@@ -588,11 +776,6 @@ button:disabled {
         rgba(80, 150, 255, 0.3);
 }
 
-
-/* =====================================
-   GŁÓWNE PRZYCISKI
-===================================== */
-
 .main-buttons {
     display: flex;
 
@@ -602,9 +785,9 @@ button:disabled {
 }
 
 
-/* =====================================
-   KOMUNIKAT KRYTYCZNY
-===================================== */
+/* =====================================================
+   CRITICAL
+===================================================== */
 
 .critical-message {
     padding: 12px;
@@ -620,9 +803,9 @@ button:disabled {
 }
 
 
-/* =====================================
+/* =====================================================
    RESPONSIVE
-===================================== */
+===================================================== */
 
 @media (max-width: 900px) {
 
@@ -660,6 +843,11 @@ button:disabled {
 
     .city-name-editor {
         flex-direction: column;
+    }
+
+    .energy-summary {
+        grid-template-columns:
+            1fr;
     }
 
 }
