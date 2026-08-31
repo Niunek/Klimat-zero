@@ -7,6 +7,10 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     margin: 0;
 
@@ -58,13 +62,28 @@ header {
 
     backdrop-filter:
         blur(12px);
+
+    -webkit-backdrop-filter:
+        blur(12px);
 }
+
+
+/* =====================================================
+   LOGO
+===================================================== */
 
 .logo {
     font-size: 24px;
 
     font-weight: bold;
+
+    letter-spacing: 0.5px;
 }
+
+
+/* =====================================================
+   NAZWA MIASTA
+===================================================== */
 
 .city-name {
     font-size: 17px;
@@ -74,7 +93,8 @@ header {
     cursor: pointer;
 
     transition:
-        0.2s;
+        opacity 0.2s,
+        transform 0.2s;
 }
 
 .city-name:hover {
@@ -102,6 +122,11 @@ main {
         50px;
 }
 
+
+/* =====================================================
+   GŁÓWNY PANEL MIASTA
+===================================================== */
+
 .city-panel {
     width: 100%;
 
@@ -121,6 +146,9 @@ main {
     backdrop-filter:
         blur(15px);
 
+    -webkit-backdrop-filter:
+        blur(15px);
+
     box-shadow:
         0 20px 60px
         rgba(0, 0, 0, 0.35);
@@ -131,14 +159,29 @@ main {
    INTRO
 ===================================================== */
 
+.city-intro {
+    width: 100%;
+}
+
 .city-intro h1 {
     margin-top: 0;
+
+    margin-bottom: 10px;
+
+    font-size: 32px;
 }
 
 .city-intro p {
     color:
         rgba(255, 255, 255, 0.75);
+
+    line-height: 1.6;
 }
+
+
+/* =====================================================
+   EDYCJA NAZWY MIASTA
+===================================================== */
 
 .city-name-editor {
     display: flex;
@@ -151,11 +194,15 @@ main {
 #city-name-input {
     flex: 1;
 
+    min-width: 0;
+
     padding:
         14px
         16px;
 
-    border: none;
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.1);
 
     outline: none;
 
@@ -167,6 +214,18 @@ main {
     color: white;
 
     font-size: 16px;
+
+    transition:
+        border 0.2s,
+        background 0.2s;
+}
+
+#city-name-input:focus {
+    border-color:
+        rgba(80, 180, 255, 0.6);
+
+    background:
+        rgba(255, 255, 255, 0.14);
 }
 
 #city-name-input::placeholder {
@@ -176,7 +235,7 @@ main {
 
 
 /* =====================================================
-   CITY VIEW
+   WIDOK MIASTA
 ===================================================== */
 
 .city-view {
@@ -209,11 +268,15 @@ main {
     border:
         2px solid
         rgba(255, 255, 255, 0.08);
+
+    box-shadow:
+        inset 0 0 40px
+        rgba(0, 0, 0, 0.12);
 }
 
 
 /* =====================================================
-   OBIEKTY
+   OBIEKTY MIASTA
 ===================================================== */
 
 .building,
@@ -250,7 +313,7 @@ main {
 
 
 /* =====================================================
-   IKONKA EFEKTU W ROGU
+   IKONA EFEKTU W ROGU
 ===================================================== */
 
 .building[data-effect]::after,
@@ -302,7 +365,7 @@ main {
 
 
 /* =====================================================
-   EFEKT HOVER
+   HOVER IKONY EFEKTU
 ===================================================== */
 
 .building:hover::after,
@@ -320,7 +383,7 @@ main {
 
 
 /* =====================================================
-   OBIEKTY — HOVER
+   HOVER OBIEKTÓW
 ===================================================== */
 
 .building:hover,
@@ -347,6 +410,11 @@ main {
 .factory {
     background:
         rgba(255, 80, 80, 0.16);
+}
+
+.factory:hover {
+    background:
+        rgba(255, 80, 80, 0.26);
 }
 
 
@@ -376,34 +444,68 @@ main {
         rgba(255, 200, 60, 0.2);
 }
 
+
+/* =====================================================
+   RODZAJE ELEKTROWNI
+===================================================== */
+
 .coal-plant {
     background:
         rgba(100, 100, 100, 0.25);
 }
+
+.coal-plant:hover {
+    background:
+        rgba(120, 120, 120, 0.35);
+}
+
 
 .wind-plant {
     background:
         rgba(100, 180, 255, 0.18);
 }
 
+.wind-plant:hover {
+    background:
+        rgba(100, 180, 255, 0.3);
+}
+
+
 .water-plant {
     background:
         rgba(40, 150, 255, 0.2);
 }
+
+.water-plant:hover {
+    background:
+        rgba(40, 150, 255, 0.32);
+}
+
 
 .solar-plant {
     background:
         rgba(255, 210, 50, 0.22);
 }
 
+.solar-plant:hover {
+    background:
+        rgba(255, 210, 50, 0.32);
+}
+
+
 .nuclear-plant {
     background:
         rgba(150, 100, 255, 0.2);
 }
 
+.nuclear-plant:hover {
+    background:
+        rgba(150, 100, 255, 0.3);
+}
+
 
 /* =====================================================
-   INNE OBIEKTY
+   RECYKLING
 ===================================================== */
 
 .recycling {
@@ -411,24 +513,69 @@ main {
         rgba(50, 200, 120, 0.16);
 }
 
+.recycling:hover {
+    background:
+        rgba(50, 200, 120, 0.28);
+}
+
+
+/* =====================================================
+   AUTOBUS
+===================================================== */
+
 .bus-depot {
     background:
         rgba(50, 130, 255, 0.16);
 }
+
+.bus-depot:hover {
+    background:
+        rgba(50, 130, 255, 0.28);
+}
+
+
+/* =====================================================
+   SZPITAL
+===================================================== */
 
 .hospital {
     background:
         rgba(255, 100, 120, 0.16);
 }
 
+.hospital:hover {
+    background:
+        rgba(255, 100, 120, 0.28);
+}
+
+
+/* =====================================================
+   DRZEWA
+===================================================== */
+
 .tree {
     background:
         rgba(50, 180, 90, 0.14);
 }
 
+.tree:hover {
+    background:
+        rgba(50, 180, 90, 0.25);
+}
+
+
+/* =====================================================
+   SAMOCHODY
+===================================================== */
+
 .car {
     background:
         rgba(80, 130, 180, 0.14);
+}
+
+.car:hover {
+    background:
+        rgba(80, 130, 180, 0.25);
 }
 
 
@@ -448,14 +595,31 @@ main {
         rgba(0, 0, 0, 0.22);
 
     min-height: 170px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.05);
+
+    box-shadow:
+        inset 0 0 25px
+        rgba(0, 0, 0, 0.08);
 }
 
 .info-panel h2 {
+    margin-top: 0;
+
+    margin-bottom: 18px;
+}
+
+.info-panel h3 {
     margin-top: 0;
 }
 
 .info-panel p {
     line-height: 1.5;
+
+    color:
+        rgba(255, 255, 255, 0.82);
 }
 
 .info-panel strong {
@@ -497,6 +661,18 @@ main {
     font-size: 22px;
 }
 
+.energy-panel > p {
+    color:
+        rgba(255, 255, 255, 0.7);
+
+    line-height: 1.5;
+}
+
+
+/* =====================================================
+   POJEDYNCZY WIERSZ ELEKTROWNI
+===================================================== */
+
 .energy-row {
 
     margin-top: 18px;
@@ -511,7 +687,25 @@ main {
     border:
         1px solid
         rgba(255, 255, 255, 0.06);
+
+    transition:
+        background 0.2s,
+        transform 0.2s;
 }
+
+.energy-row:hover {
+
+    background:
+        rgba(255, 255, 255, 0.075);
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* =====================================================
+   GÓRA WIERSZA
+===================================================== */
 
 .energy-row-top {
 
@@ -521,11 +715,15 @@ main {
 
     align-items: center;
 
+    gap: 15px;
+
     margin-bottom: 10px;
 }
 
 .energy-name {
     font-weight: bold;
+
+    line-height: 1.4;
 }
 
 .energy-percent {
@@ -533,11 +731,13 @@ main {
     font-size: 18px;
 
     font-weight: bold;
+
+    white-space: nowrap;
 }
 
 
 /* =====================================================
-   SUWAK
+   SUWAK ENERGII
 ===================================================== */
 
 .energy-slider {
@@ -569,6 +769,11 @@ main {
         rgba(80, 220, 150, 0.18);
 }
 
+
+/* =====================================================
+   SUWAK — CHROME / EDGE / OPERA
+===================================================== */
+
 .energy-slider::-webkit-slider-thumb {
 
     appearance: none;
@@ -592,7 +797,29 @@ main {
         rgba(0, 0, 0, 0.45);
 
     cursor: grab;
+
+    transition:
+        transform 0.15s;
 }
+
+.energy-slider::-webkit-slider-thumb:hover {
+
+    transform:
+        scale(1.12);
+}
+
+.energy-slider::-webkit-slider-thumb:active {
+
+    cursor: grabbing;
+
+    transform:
+        scale(1.18);
+}
+
+
+/* =====================================================
+   SUWAK — FIREFOX
+===================================================== */
 
 .energy-slider::-moz-range-thumb {
 
@@ -607,6 +834,10 @@ main {
     border:
         3px solid
         #35d07f;
+
+    box-shadow:
+        0 3px 12px
+        rgba(0, 0, 0, 0.45);
 
     cursor: grab;
 }
@@ -626,11 +857,20 @@ main {
         );
 }
 
+
+/* =====================================================
+   SZCZEGÓŁY ENERGII
+===================================================== */
+
 .energy-details {
 
     display: flex;
 
     justify-content: space-between;
+
+    align-items: center;
+
+    gap: 10px;
 
     margin-top: 10px;
 
@@ -642,7 +882,7 @@ main {
 
 
 /* =====================================================
-   ENERGY SUMMARY
+   PODSUMOWANIE ENERGII
 ===================================================== */
 
 .energy-summary {
@@ -667,6 +907,8 @@ main {
         rgba(255, 255, 255, 0.06);
 
     text-align: center;
+
+    line-height: 1.4;
 }
 
 .energy-summary strong {
@@ -680,10 +922,14 @@ main {
 
 
 /* =====================================================
-   UPGRADE
+   PRZYCISK ULEPSZENIA
 ===================================================== */
 
 .upgrade-button {
+
+    position: relative;
+
+    width: 100%;
 
     background:
         rgba(50, 210, 130, 0.2);
@@ -691,6 +937,8 @@ main {
     border:
         1px solid
         rgba(50, 210, 130, 0.2);
+
+    padding-right: 55px;
 }
 
 .upgrade-button:hover:not(:disabled) {
@@ -699,9 +947,49 @@ main {
         rgba(50, 210, 130, 0.35);
 }
 
+.upgrade-button:active:not(:disabled) {
+
+    transform:
+        scale(0.98);
+}
+
 
 /* =====================================================
-   STATYSTYKI
+   IKONA ULEPSZENIA
+===================================================== */
+
+.upgrade-icon {
+
+    position: absolute;
+
+    right: 14px;
+
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+    width: 30px;
+
+    height: 30px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        rgba(0, 0, 0, 0.25);
+
+    font-size: 17px;
+}
+
+
+/* =====================================================
+   STATYSTYKI MIASTA
 ===================================================== */
 
 .city-stats {
@@ -752,7 +1040,7 @@ main {
 
 
 /* =====================================================
-   CO2 BAR
+   PASEK CO2
 ===================================================== */
 
 .pollution-bar-container {
@@ -764,6 +1052,10 @@ main {
     display: flex;
 
     justify-content: space-between;
+
+    align-items: center;
+
+    gap: 10px;
 
     margin-bottom: 8px;
 }
@@ -780,6 +1072,10 @@ main {
     border-radius: 20px;
 
     overflow: hidden;
+
+    box-shadow:
+        inset 0 1px 4px
+        rgba(0, 0, 0, 0.25);
 }
 
 #pollution-fill {
@@ -804,7 +1100,7 @@ main {
 
 
 /* =====================================================
-   STATUS
+   STATUS MIASTA
 ===================================================== */
 
 .city-status {
@@ -823,7 +1119,16 @@ main {
     font-size: 20px;
 
     font-weight: bold;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.06);
 }
+
+
+/* =====================================================
+   STATUS TUR
+===================================================== */
 
 .turn-status {
 
@@ -837,11 +1142,18 @@ main {
 
     background:
         rgba(50, 210, 130, 0.12);
+
+    border:
+        1px solid
+        rgba(50, 210, 130, 0.12);
+
+    transition:
+        background 0.2s;
 }
 
 
 /* =====================================================
-   BUTTONS
+   BUTTONS — GŁÓWNE
 ===================================================== */
 
 button {
@@ -869,7 +1181,13 @@ button {
 
     transition:
         transform 0.15s,
-        background 0.15s;
+        background 0.15s,
+        opacity 0.15s;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
 }
 
 button:hover:not(:disabled) {
@@ -881,6 +1199,12 @@ button:hover:not(:disabled) {
         rgba(255, 255, 255, 0.2);
 }
 
+button:active:not(:disabled) {
+
+    transform:
+        translateY(0);
+}
+
 button:disabled {
 
     cursor: not-allowed;
@@ -888,17 +1212,27 @@ button:disabled {
     opacity: 0.55;
 }
 
+
+/* =====================================================
+   RESET
+===================================================== */
+
 #reset-budget {
 
     background:
         rgba(255, 180, 50, 0.18);
 }
 
-#reset-budget:hover {
+#reset-budget:hover:not(:disabled) {
 
     background:
         rgba(255, 180, 50, 0.3);
 }
+
+
+/* =====================================================
+   KONIEC TURY
+===================================================== */
 
 #end-turn {
 
@@ -906,11 +1240,16 @@ button:disabled {
         rgba(80, 150, 255, 0.18);
 }
 
-#end-turn:hover {
+#end-turn:hover:not(:disabled) {
 
     background:
         rgba(80, 150, 255, 0.3);
 }
+
+
+/* =====================================================
+   PRZYCISKI GŁÓWNE
+===================================================== */
 
 .main-buttons {
 
@@ -921,14 +1260,42 @@ button:disabled {
     margin-top: 25px;
 }
 
+.main-buttons button {
+
+    flex: 1;
+}
+
 
 /* =====================================================
-   CRITICAL
+   WSZYSTKIE ELEKTROWNIE
+===================================================== */
+
+.show-all-energy {
+
+    background:
+        rgba(80, 150, 255, 0.16);
+
+    border:
+        1px solid
+        rgba(80, 150, 255, 0.15);
+}
+
+.show-all-energy:hover:not(:disabled) {
+
+    background:
+        rgba(80, 150, 255, 0.28);
+}
+
+
+/* =====================================================
+   KRYTYCZNY KOMUNIKAT
 ===================================================== */
 
 .critical-message {
 
-    padding: 12px;
+    margin-top: 15px;
+
+    padding: 14px;
 
     border-radius: 12px;
 
@@ -938,11 +1305,50 @@ button:disabled {
     border:
         1px solid
         rgba(255, 70, 70, 0.2);
+
+    line-height: 1.55;
+
+    box-shadow:
+        0 5px 20px
+        rgba(255, 50, 50, 0.05);
 }
 
 
 /* =====================================================
-   RESPONSIVE
+   HR
+===================================================== */
+
+hr {
+
+    border: none;
+
+    border-top:
+        1px solid
+        rgba(255, 255, 255, 0.1);
+
+    margin:
+        20px
+        0;
+}
+
+
+/* =====================================================
+   FOCUS — DOSTĘPNOŚĆ
+===================================================== */
+
+button:focus-visible,
+input:focus-visible {
+
+    outline:
+        2px solid
+        rgba(100, 190, 255, 0.8);
+
+    outline-offset: 3px;
+}
+
+
+/* =====================================================
+   RESPONSIVE — TABLET
 ===================================================== */
 
 @media (max-width: 900px) {
@@ -953,17 +1359,37 @@ button:disabled {
             repeat(5, 1fr);
     }
 
+    .energy-summary {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
 }
 
+
+/* =====================================================
+   RESPONSIVE — MAŁE TABLETY / TELEFONY
+===================================================== */
 
 @media (max-width: 700px) {
 
     header {
-        padding: 0 15px;
+
+        padding:
+            0
+            15px;
     }
 
     .city-panel {
-        padding: 20px;
+
+        padding:
+            20px;
+    }
+
+    .city-intro h1 {
+
+        font-size: 27px;
     }
 
     .city-view {
@@ -987,23 +1413,64 @@ button:disabled {
         flex-direction: column;
     }
 
+    .city-name-editor button {
+
+        width: 100%;
+    }
+
     .energy-summary {
 
         grid-template-columns:
             1fr;
     }
 
+    .energy-details {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 4px;
+    }
+
 }
 
 
+/* =====================================================
+   RESPONSIVE — TELEFONY
+===================================================== */
+
 @media (max-width: 500px) {
 
+    header {
+
+        height: 60px;
+    }
+
     .logo {
+
         font-size: 18px;
     }
 
     .city-name {
+
         font-size: 14px;
+    }
+
+    main {
+
+        padding:
+            20px
+            8px
+            30px;
+    }
+
+    .city-panel {
+
+        padding:
+            15px;
+
+        border-radius: 18px;
     }
 
     .city-view {
@@ -1011,9 +1478,12 @@ button:disabled {
         grid-template-columns:
             repeat(3, 1fr);
 
-        padding: 15px;
+        padding:
+            15px;
 
         gap: 10px;
+
+        min-height: 420px;
     }
 
     .building,
@@ -1025,6 +1495,8 @@ button:disabled {
         height: 60px;
 
         font-size: 35px;
+
+        border-radius: 15px;
     }
 
     .building[data-effect]::after,
@@ -1053,4 +1525,89 @@ button:disabled {
         flex-direction: column;
     }
 
+    .main-buttons button {
+
+        width: 100%;
+    }
+
+    .energy-panel {
+
+        padding:
+            15px;
+    }
+
+    .energy-row {
+
+        padding:
+            12px;
+    }
+
+    .energy-row-top {
+
+        align-items:
+            flex-start;
+
+        flex-direction:
+            column;
+
+        gap: 5px;
+    }
+
+    .energy-percent {
+
+        font-size: 16px;
+    }
+
+    .pollution-info {
+
+        font-size: 14px;
+    }
+
+    .info-panel {
+
+        padding:
+            18px;
+    }
+
 }
+
+
+/* =====================================================
+   BARDZO MAŁE TELEFONY
+===================================================== */
+
+@media (max-width: 360px) {
+
+    .city-view {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .logo {
+
+        font-size: 16px;
+    }
+
+    .city-name {
+
+        font-size: 12px;
+    }
+
+    .building,
+    .tree,
+    .car {
+
+        width: 58px;
+
+        height: 58px;
+
+        font-size: 32px;
+    }
+
+}
+
+
+/* =====================================================
+   KONIEC STYLE.CSS
+===================================================== */

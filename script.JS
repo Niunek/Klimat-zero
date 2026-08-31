@@ -1,65 +1,94 @@
 // =====================================================
 // CLIMATE: ZERO
-// ZARZĄDZANIE MIASTEM + ENERGIA
+// PEŁNY SCRIPT.JS
+// ZARZĄDZANIE MIASTEM + ENERGIA + ZAPIS GRY
 // =====================================================
 
 
 // =====================================================
-// STATYSTYKI
+// STATYSTYKI GRY
 // =====================================================
 
 let co2 = 75;
+
 let cleanliness = 40;
+
 let satisfaction = 60;
+
 let budget = 1000;
+
 let turn = 1;
 
 let cityName = "Moje miasto";
 
 
 // =====================================================
-// BLOKADA TUR
+// BLOKADA SZYBKICH TUR
 // =====================================================
 
 let turnTimes = [];
+
 let turnWarningShown = false;
+
 let turnLockedUntil = 0;
 
 const TURN_LIMIT = 5;
+
 const TURN_TIME_WINDOW = 7000;
+
 const TURN_WARNING_TIME = 3000;
+
 const TURN_LOCK_TIME = 5 * 60 * 1000;
 
 
 // =====================================================
-// OBIEKTY
+// OBIEKTY MIASTA
 // =====================================================
 
 let offices = {
+
     "office-1": 0,
+
     "office-2": 0
+
 };
+
 
 let parks = {
+
     "park-1": 0,
+
     "park-2": 0,
+
     "park-3": 0
+
 };
+
 
 let cars = {
+
     "car-1": 0,
+
     "car-2": 0
+
 };
 
+
 let factories = {
+
     "factory-1": 0,
+
     "factory-2": 0
+
 };
+
 
 let houseLevel = 0;
 
 let recyclingLevel = 0;
+
 let busLevel = 0;
+
 let hospitalLevel = 0;
 
 
@@ -70,60 +99,104 @@ let hospitalLevel = 0;
 let powerPlants = {
 
     coal: {
+
         name: "Elektrownia węglowa",
+
         emoji: "🏭",
+
         power: 25,
+
         maxProduction: 100,
+
         baseCO2: 22,
+
         costMultiplier: 1.5,
+
         cleanliness: -2
+
     },
+
 
     wind: {
+
         name: "Elektrownia wiatrowa",
+
         emoji: "🌬️",
+
         power: 15,
+
         maxProduction: 80,
+
         baseCO2: 1,
+
         costMultiplier: 0.35,
+
         cleanliness: 3
+
     },
+
 
     water: {
+
         name: "Elektrownia wodna",
+
         emoji: "💧",
+
         power: 35,
+
         maxProduction: 120,
+
         baseCO2: 2,
+
         costMultiplier: 0.4,
+
         cleanliness: 4
+
     },
+
 
     solar: {
+
         name: "Elektrownia słoneczna",
+
         emoji: "☀️",
+
         power: 40,
+
         maxProduction: 70,
+
         baseCO2: 1,
+
         costMultiplier: 0.3,
+
         cleanliness: 3
+
     },
 
+
     nuclear: {
+
         name: "Elektrownia jądrowa",
+
         emoji: "☢️",
+
         power: 60,
+
         maxProduction: 180,
+
         baseCO2: 2,
+
         costMultiplier: 0.6,
+
         cleanliness: 5
+
     }
 
 };
 
 
 // =====================================================
-// COOLDOWN
+// COOLDOWN ULEPSZEŃ
 // =====================================================
 
 let cooldowns = {};
@@ -164,22 +237,34 @@ const saveCityNameButton =
 function updateCityName() {
 
     if (cityNameDisplay) {
+
         cityNameDisplay.textContent =
             "🏙️ " + cityName;
+
     }
+
 
     if (cityTitle) {
+
         cityTitle.textContent =
             cityName;
+
     }
 
+
     if (cityNameInput) {
+
         cityNameInput.value =
             cityName;
+
     }
 
 }
 
+
+// =====================================================
+// ZMIANA NAZWY MIASTA
+// =====================================================
 
 function changeCityName() {
 
@@ -191,12 +276,17 @@ function changeCityName() {
                 cityName
             );
 
+
     if (newName === null) {
+
         return;
+
     }
+
 
     const trimmedName =
         newName.trim();
+
 
     if (!trimmedName.length) {
 
@@ -205,7 +295,9 @@ function changeCityName() {
         );
 
         return;
+
     }
+
 
     if (trimmedName.length > 30) {
 
@@ -214,15 +306,24 @@ function changeCityName() {
         );
 
         return;
+
     }
 
-    cityName = trimmedName;
+
+    cityName =
+        trimmedName;
+
 
     updateCityName();
+
     saveGame();
 
 }
 
+
+// =====================================================
+// EVENT — NAZWA MIASTA
+// =====================================================
 
 if (cityNameDisplay) {
 
@@ -231,8 +332,11 @@ if (cityNameDisplay) {
         function() {
 
             if (cityNameInput) {
+
                 cityNameInput.focus();
+
                 cityNameInput.select();
+
             }
 
         }
@@ -258,7 +362,9 @@ if (cityNameInput) {
         function(event) {
 
             if (event.key === "Enter") {
+
                 changeCityName();
+
             }
 
         }
@@ -268,7 +374,7 @@ if (cityNameInput) {
 
 
 // =====================================================
-// STATYSTYKI
+// AKTUALIZACJA STATYSTYK
 // =====================================================
 
 function updateStats() {
@@ -276,20 +382,32 @@ function updateStats() {
     co2 =
         Math.max(
             0,
-            Math.min(100, Math.round(co2))
+            Math.min(
+                100,
+                Math.round(co2)
+            )
         );
+
 
     cleanliness =
         Math.max(
             0,
-            Math.min(100, Math.round(cleanliness))
+            Math.min(
+                100,
+                Math.round(cleanliness)
+            )
         );
+
 
     satisfaction =
         Math.max(
             0,
-            Math.min(100, Math.round(satisfaction))
+            Math.min(
+                100,
+                Math.round(satisfaction)
+            )
         );
+
 
     budget =
         Math.max(
@@ -298,59 +416,128 @@ function updateStats() {
         );
 
 
-    document.getElementById("co2").textContent =
-        co2 + "%";
+    const co2Element =
+        document.getElementById("co2");
 
-    document.getElementById("cleanliness").textContent =
-        cleanliness + "%";
 
-    document.getElementById("satisfaction").textContent =
-        satisfaction + "%";
+    const cleanlinessElement =
+        document.getElementById("cleanliness");
 
-    document.getElementById("budget").textContent =
-        budget + " $";
 
-    document.getElementById("turn").textContent =
-        turn;
+    const satisfactionElement =
+        document.getElementById("satisfaction");
+
+
+    const budgetElement =
+        document.getElementById("budget");
+
+
+    const turnElement =
+        document.getElementById("turn");
+
+
+    const factoriesElement =
+        document.getElementById("factories");
+
+
+    if (co2Element) {
+
+        co2Element.textContent =
+            co2 + "%";
+
+    }
+
+
+    if (cleanlinessElement) {
+
+        cleanlinessElement.textContent =
+            cleanliness + "%";
+
+    }
+
+
+    if (satisfactionElement) {
+
+        satisfactionElement.textContent =
+            satisfaction + "%";
+
+    }
+
+
+    if (budgetElement) {
+
+        budgetElement.textContent =
+            budget + " $";
+
+    }
+
+
+    if (turnElement) {
+
+        turnElement.textContent =
+            turn;
+
+    }
 
 
     const factoryCount =
         Object.values(factories)
-            .filter(level => level > 0)
+            .filter(
+                level => level > 0
+            )
             .length;
 
-    document.getElementById("factories").textContent =
-        factoryCount;
+
+    if (factoriesElement) {
+
+        factoriesElement.textContent =
+            factoryCount;
+
+    }
 
 
     updatePollutionBar();
+
     updateCityStatus();
+
     updateTurnStatus();
+
     updateCityName();
 
 }
 
 
 // =====================================================
-// CO2 BAR
+// PASEK CO2
 // =====================================================
 
 function updatePollutionBar() {
 
     const value =
-        document.getElementById("pollution-value");
+        document.getElementById(
+            "pollution-value"
+        );
+
 
     const fill =
-        document.getElementById("pollution-fill");
+        document.getElementById(
+            "pollution-fill"
+        );
+
 
     if (value) {
+
         value.textContent =
             co2 + "%";
+
     }
 
+
     if (fill) {
+
         fill.style.width =
             co2 + "%";
+
     }
 
 }
@@ -365,58 +552,88 @@ function getCityStatus() {
     if (co2 >= 80) {
 
         return {
+
             name: "KRYTYCZNY",
+
             emoji: "🔴"
+
         };
 
     }
+
 
     if (co2 >= 65) {
 
         return {
+
             name: "ZŁY",
+
             emoji: "🟠"
+
         };
 
     }
+
 
     if (co2 >= 45) {
 
         return {
+
             name: "ŚREDNI",
+
             emoji: "🟡"
+
         };
 
     }
+
 
     if (co2 >= 25) {
 
         return {
+
             name: "DOBRY",
+
             emoji: "🟢"
+
         };
 
     }
 
+
     return {
+
         name: "ŚWIETNY",
+
         emoji: "🔵"
+
     };
 
 }
 
 
+// =====================================================
+// AKTUALIZACJA STATUSU
+// =====================================================
+
 function updateCityStatus() {
 
     const element =
-        document.getElementById("city-status");
+        document.getElementById(
+            "city-status"
+        );
+
 
     if (!element) {
+
         return;
+
     }
+
 
     const status =
         getCityStatus();
+
 
     element.textContent =
         `${status.emoji} ${status.name}`;
@@ -425,7 +642,7 @@ function updateCityStatus() {
 
 
 // =====================================================
-// TUR
+// BLOKADA TUR
 // =====================================================
 
 function isTurnLocked() {
@@ -434,6 +651,10 @@ function isTurnLocked() {
 
 }
 
+
+// =====================================================
+// POZOSTAŁY CZAS BLOKADY
+// =====================================================
 
 function getTurnLockRemaining() {
 
@@ -445,14 +666,24 @@ function getTurnLockRemaining() {
 }
 
 
+// =====================================================
+// STATUS BLOKADY TUR
+// =====================================================
+
 function updateTurnStatus() {
 
     const element =
-        document.getElementById("turn-status");
+        document.getElementById(
+            "turn-status"
+        );
+
 
     if (!element) {
+
         return;
+
     }
+
 
     if (isTurnLocked()) {
 
@@ -461,28 +692,40 @@ function updateTurnStatus() {
                 getTurnLockRemaining() / 1000
             );
 
+
         element.textContent =
             `⛔ Tury zablokowane — ${seconds}s`;
 
+
         if (endTurnButton) {
-            endTurnButton.disabled = true;
+
+            endTurnButton.disabled =
+                true;
+
         }
 
+
         return;
+
     }
+
 
     element.textContent =
         "🟢 Możesz zakończyć turę.";
 
+
     if (endTurnButton) {
-        endTurnButton.disabled = false;
+
+        endTurnButton.disabled =
+            false;
+
     }
 
 }
 
 
 // =====================================================
-// KOSZT ULEPSZEŃ
+// KOSZT ULEPSZENIA
 // =====================================================
 
 function getCost(start, level) {
@@ -493,14 +736,17 @@ function getCost(start, level) {
 
 
 // =====================================================
-// COOLDOWN
+// COOLDOWN — POZOSTAŁY CZAS
 // =====================================================
 
 function getRemainingCooldown(id) {
 
     if (!cooldowns[id]) {
+
         return 0;
+
     }
+
 
     return Math.max(
         0,
@@ -510,6 +756,10 @@ function getRemainingCooldown(id) {
 
 }
 
+
+// =====================================================
+// ROZPOCZĘCIE COOLDOWNU
+// =====================================================
 
 function startCooldown(id) {
 
@@ -528,9 +778,11 @@ function getUpgradeIcon(action) {
     const icons = {
 
         chemical: "🌫️",
+
         industrial: "🌫️",
 
         office: "⚡",
+
         house: "⚡",
 
         park: "🌱",
@@ -545,13 +797,14 @@ function getUpgradeIcon(action) {
 
     };
 
+
     return icons[action] || "🔧";
 
 }
 
 
 // =====================================================
-// INFORMACJA O EFEKCIE
+// OPIS EFEKTU
 // =====================================================
 
 function getEffectText(action) {
@@ -587,7 +840,9 @@ function getEffectText(action) {
 
     };
 
+
     return effects[action] || "";
+
 }
 
 
@@ -600,8 +855,10 @@ function upgradeButton(action, id, cost) {
     const remaining =
         getRemainingCooldown(id);
 
+
     const icon =
         getUpgradeIcon(action);
+
 
     const effect =
         getEffectText(action);
@@ -614,34 +871,44 @@ function upgradeButton(action, id, cost) {
                 remaining / 1000
             );
 
+
         return `
+
             <button
                 class="upgrade-button"
                 disabled
             >
+
                 ⏳ Dostępne za ${seconds}s
+
                 <span class="upgrade-icon">
                     ${icon}
                 </span>
+
             </button>
+
         `;
 
     }
 
 
     return `
+
         <button
             class="upgrade-button"
             data-action="${action}"
             data-id="${id}"
             title="${effect}"
         >
+
             🔧 Ulepsz — ${cost} $
 
             <span class="upgrade-icon">
                 ${icon}
             </span>
+
         </button>
+
     `;
 
 }
@@ -653,13 +920,20 @@ function upgradeButton(action, id, cost) {
 
 function showChemicalFactory() {
 
-    const id = "factory-1";
+    const id =
+        "factory-1";
+
 
     const level =
         factories[id];
 
+
     const cost =
-        getCost(300, level);
+        getCost(
+            300,
+            level
+        );
+
 
     const emission =
         Math.max(
@@ -670,7 +944,9 @@ function showChemicalFactory() {
 
     infoPanel.innerHTML = `
 
-        <h2>🏭 Fabryka chemiczna</h2>
+        <h2>
+            🏭 Fabryka chemiczna
+        </h2>
 
         <p>
             🌫️ Emisja CO₂:
@@ -710,13 +986,20 @@ function showChemicalFactory() {
 
 function showIndustrialFactory() {
 
-    const id = "factory-2";
+    const id =
+        "factory-2";
+
 
     const level =
         factories[id];
 
+
     const cost =
-        getCost(350, level);
+        getCost(
+            350,
+            level
+        );
+
 
     const emission =
         Math.max(
@@ -727,7 +1010,9 @@ function showIndustrialFactory() {
 
     infoPanel.innerHTML = `
 
-        <h2>🏭 Fabryka przemysłowa</h2>
+        <h2>
+            🏭 Fabryka przemysłowa
+        </h2>
 
         <p>
             🌫️ Emisja CO₂:
@@ -770,8 +1055,13 @@ function showOffice(id) {
     const level =
         offices[id];
 
+
     const cost =
-        getCost(100, level);
+        getCost(
+            100,
+            level
+        );
+
 
     const energy =
         10 + level * 2;
@@ -779,7 +1069,9 @@ function showOffice(id) {
 
     infoPanel.innerHTML = `
 
-        <h2>🏢 Biurowiec</h2>
+        <h2>
+            🏢 Biurowiec
+        </h2>
 
         <p>
             🆔 ${id}
@@ -818,7 +1110,7 @@ function showOffice(id) {
 
 
 // =====================================================
-// DOM
+// DOM / DOMY
 // =====================================================
 
 function showHouse() {
@@ -826,14 +1118,17 @@ function showHouse() {
     const id =
         "house-1";
 
+
     const cost =
         getCost(
             150,
             houseLevel
         );
 
+
     const houseCount =
         1 + houseLevel;
+
 
     const energy =
         houseCount * 5;
@@ -841,7 +1136,9 @@ function showHouse() {
 
     infoPanel.innerHTML = `
 
-        <h2>🏠 Dom mieszkalny</h2>
+        <h2>
+            🏠 Dom mieszkalny
+        </h2>
 
         <p>
             👥 Mieszkańcy:
@@ -891,13 +1188,19 @@ function showPark(id) {
     const level =
         parks[id];
 
+
     const cost =
-        getCost(200, level);
+        getCost(
+            200,
+            level
+        );
 
 
     infoPanel.innerHTML = `
 
-        <h2>🌳 Park miejski</h2>
+        <h2>
+            🌳 Park miejski
+        </h2>
 
         <p>
             🆔 ${id}
@@ -944,13 +1247,19 @@ function showCar(id) {
     const level =
         cars[id];
 
+
     const cost =
-        getCost(250, level);
+        getCost(
+            250,
+            level
+        );
 
 
     infoPanel.innerHTML = `
 
-        <h2>🚗 Ruch drogowy</h2>
+        <h2>
+            🚗 Ruch drogowy
+        </h2>
 
         <p>
             🆔 ${id}
@@ -959,7 +1268,10 @@ function showCar(id) {
         <p>
             🌫️ Wpływ na CO₂:
             <strong>
-                ${Math.max(0, 3 - level)}%
+                ${Math.max(
+                    0,
+                    3 - level
+                )}%
             </strong>
         </p>
 
@@ -989,7 +1301,7 @@ function showCar(id) {
 
 
 // =====================================================
-// ELEKTROWNIE — OBLICZENIA
+// OBLICZENIA ELEKTROWNI
 // =====================================================
 
 function calculatePlantStats(id) {
@@ -997,14 +1309,34 @@ function calculatePlantStats(id) {
     const plant =
         powerPlants[id];
 
+
+    if (!plant) {
+
+        return {
+
+            production: 0,
+
+            cost: 0,
+
+            emission: 0,
+
+            clean: 0
+
+        };
+
+    }
+
+
     const power =
         plant.power;
+
 
     const production =
         Math.round(
             plant.maxProduction *
             power / 100
         );
+
 
     const cost =
         Math.round(
@@ -1016,9 +1348,12 @@ function calculatePlantStats(id) {
             plant.costMultiplier
         );
 
+
     const emission =
         power <= 0
+
             ? 0
+
             : Math.max(
                 1,
                 Math.round(
@@ -1030,8 +1365,10 @@ function calculatePlantStats(id) {
                 )
             );
 
+
     const clean =
         power > 0
+
             ? Math.max(
                 0,
                 Math.round(
@@ -1039,21 +1376,27 @@ function calculatePlantStats(id) {
                     power / 100
                 )
             )
+
             : 0;
 
 
     return {
+
         production,
+
         cost,
+
         emission,
+
         clean
+
     };
 
 }
 
 
 // =====================================================
-// ZUŻYCIE ENERGII MIASTA
+// ZAPOTRZEBOWANIE ENERGETYCZNE MIASTA
 // =====================================================
 
 function calculateCityEnergyDemand() {
@@ -1061,50 +1404,66 @@ function calculateCityEnergyDemand() {
     let demand = 0;
 
 
+    // -------------------------------------------------
     // DOMY
+    // -------------------------------------------------
 
     demand +=
         (1 + houseLevel) * 5;
 
 
+    // -------------------------------------------------
     // BIUROWCE
+    // -------------------------------------------------
 
     Object.values(offices)
-        .forEach(level => {
-
-            demand +=
-                10 + level * 2;
-
-        });
-
-
-    // FABRYKI
-
-    Object.values(factories)
-        .forEach(level => {
-
-            if (level > 0) {
+        .forEach(
+            level => {
 
                 demand +=
-                    20 + level * 4;
+                    10 + level * 2;
 
             }
+        );
 
-        });
+
+    // -------------------------------------------------
+    // FABRYKI
+    // -------------------------------------------------
+
+    Object.values(factories)
+        .forEach(
+            level => {
+
+                if (level > 0) {
+
+                    demand +=
+                        20 + level * 4;
+
+                }
+
+            }
+        );
 
 
+    // -------------------------------------------------
     // SAMOCHODY
+    // -------------------------------------------------
 
     Object.values(cars)
-        .forEach(level => {
+        .forEach(
+            level => {
 
-            demand +=
-                2 + level;
+                demand +=
+                    2 + level;
 
-        });
+            }
+        );
 
 
+    // -------------------------------------------------
     // RECYKLING
+    // -------------------------------------------------
 
     if (recyclingLevel > 0) {
 
@@ -1114,7 +1473,9 @@ function calculateCityEnergyDemand() {
     }
 
 
+    // -------------------------------------------------
     // AUTOBUSY
+    // -------------------------------------------------
 
     if (busLevel > 0) {
 
@@ -1124,7 +1485,9 @@ function calculateCityEnergyDemand() {
     }
 
 
+    // -------------------------------------------------
     // SZPITAL
+    // -------------------------------------------------
 
     if (hospitalLevel > 0) {
 
@@ -1134,7 +1497,9 @@ function calculateCityEnergyDemand() {
     }
 
 
-    return Math.round(demand);
+    return Math.round(
+        demand
+    );
 
 }
 
@@ -1146,30 +1511,39 @@ function calculateCityEnergyDemand() {
 function calculateEnergySystem() {
 
     let production = 0;
+
     let plantCost = 0;
+
     let plantCO2 = 0;
+
     let plantClean = 0;
 
 
     Object.keys(powerPlants)
-        .forEach(function(id) {
+        .forEach(
+            id => {
 
-            const stats =
-                calculatePlantStats(id);
+                const stats =
+                    calculatePlantStats(id);
 
-            production +=
-                stats.production;
 
-            plantCost +=
-                stats.cost;
+                production +=
+                    stats.production;
 
-            plantCO2 +=
-                stats.emission;
 
-            plantClean +=
-                stats.clean;
+                plantCost +=
+                    stats.cost;
 
-        });
+
+                plantCO2 +=
+                    stats.emission;
+
+
+                plantClean +=
+                    stats.clean;
+
+            }
+        );
 
 
     const demand =
@@ -1195,14 +1569,19 @@ function calculateEnergySystem() {
     return {
 
         production,
+
         demand,
+
         shortage,
 
         plantCost,
+
         emergencyCost,
+
         totalCost,
 
         co2: plantCO2,
+
         clean: plantClean
 
     };
@@ -1211,7 +1590,7 @@ function calculateEnergySystem() {
 
 
 // =====================================================
-// PANEL ELEKTROWNI
+// PANEL POJEDYNCZEJ ELEKTROWNI
 // =====================================================
 
 function showPowerPlant(id) {
@@ -1219,16 +1598,19 @@ function showPowerPlant(id) {
     const plant =
         powerPlants[id];
 
+
     if (!plant) {
 
         showAllPowerPlants();
 
         return;
+
     }
 
 
     const stats =
         calculatePlantStats(id);
+
 
     const energy =
         calculateEnergySystem();
@@ -1265,8 +1647,11 @@ function showPowerPlant(id) {
         <p>
             🌱 Wpływ na czystość:
             <strong>
-                ${stats.clean >= 0 ? "+" : ""}
-                ${stats.clean}%
+                ${
+                    stats.clean >= 0
+                        ? "+"
+                        : ""
+                }${stats.clean}%
             </strong>
         </p>
 
@@ -1280,7 +1665,8 @@ function showPowerPlant(id) {
         <p>
             ⚡ Bilans energii:
             <strong>
-                ${energy.production - energy.demand} MW
+                ${energy.production -
+                energy.demand} MW
             </strong>
         </p>
 
@@ -1383,68 +1769,71 @@ function showAllPowerPlants() {
 
 
     Object.keys(powerPlants)
-        .forEach(function(id) {
+        .forEach(
+            id => {
 
-            const plant =
-                powerPlants[id];
-
-            const stats =
-                calculatePlantStats(id);
+                const plant =
+                    powerPlants[id];
 
 
-            html += `
+                const stats =
+                    calculatePlantStats(id);
 
-                <div class="energy-row">
 
-                    <div class="energy-row-top">
+                html += `
 
-                        <span class="energy-name">
-                            ${plant.emoji}
-                            ${plant.name}
-                        </span>
+                    <div class="energy-row">
 
-                        <span
-                            class="energy-percent"
-                            id="percent-${id}"
+                        <div class="energy-row-top">
+
+                            <span class="energy-name">
+                                ${plant.emoji}
+                                ${plant.name}
+                            </span>
+
+                            <span
+                                class="energy-percent"
+                                id="percent-${id}"
+                            >
+                                ${plant.power}%
+                            </span>
+
+                        </div>
+
+
+                        <input
+                            class="energy-slider"
+                            type="range"
+                            min="0"
+                            max="100"
+                            step="5"
+                            value="${plant.power}"
+                            data-plant="${id}"
                         >
-                            ${plant.power}%
-                        </span>
+
+
+                        <div class="energy-details">
+
+                            <span>
+                                ⚡ ${stats.production} MW
+                            </span>
+
+                            <span>
+                                🌫️ +${stats.emission}% CO₂
+                            </span>
+
+                            <span>
+                                💰 ${stats.cost} $ / turę
+                            </span>
+
+                        </div>
 
                     </div>
 
+                `;
 
-                    <input
-                        class="energy-slider"
-                        type="range"
-                        min="0"
-                        max="100"
-                        step="5"
-                        value="${plant.power}"
-                        data-plant="${id}"
-                    >
-
-
-                    <div class="energy-details">
-
-                        <span>
-                            ⚡ ${stats.production} MW
-                        </span>
-
-                        <span>
-                            🌫️ +${stats.emission}% CO₂
-                        </span>
-
-                        <span>
-                            💰 ${stats.cost} $ / turę
-                        </span>
-
-                    </div>
-
-                </div>
-
-            `;
-
-        });
+            }
+        );
 
 
     const balance =
@@ -1510,6 +1899,7 @@ function showAllPowerPlants() {
             <div class="critical-message">
 
                 🚨
+
                 <strong>
                     Brak wystarczającej energii!
                 </strong>
@@ -1517,11 +1907,13 @@ function showAllPowerPlants() {
                 <br><br>
 
                 Miasto potrzebuje
+
                 <strong>
                     ${energy.demand} MW
                 </strong>,
 
                 ale produkuje tylko
+
                 <strong>
                     ${energy.production} MW
                 </strong>.
@@ -1529,9 +1921,11 @@ function showAllPowerPlants() {
                 <br>
 
                 Awaryjna energia kosztuje:
+
                 <strong>
                     ${energy.emergencyCost} $
                 </strong>
+
                 / turę.
 
             </div>
@@ -1571,61 +1965,76 @@ function showAllPowerPlants() {
 
 
 // =====================================================
-// SUWAKI
+// OBSŁUGA SUWAKÓW ELEKTROWNI
 // =====================================================
 
 function setupEnergySliders() {
 
     document
-        .querySelectorAll(".energy-slider")
-        .forEach(function(slider) {
+        .querySelectorAll(
+            ".energy-slider"
+        )
+        .forEach(
+            slider => {
 
-            slider.addEventListener(
-                "input",
-                function() {
+                slider.addEventListener(
+                    "input",
+                    function() {
 
-                    const id =
-                        slider.dataset.plant;
+                        const id =
+                            slider.dataset.plant;
 
-                    const value =
-                        Number(
-                            slider.value
+
+                        const value =
+                            Number(
+                                slider.value
+                            );
+
+
+                        if (!powerPlants[id]) {
+
+                            return;
+
+                        }
+
+
+                        powerPlants[id].power =
+                            value;
+
+
+                        updateSliderDisplay(
+                            slider,
+                            id
                         );
 
-
-                    if (!powerPlants[id]) {
-                        return;
                     }
+                );
 
-
-                    powerPlants[id].power =
-                        value;
-
-
-                    updateSliderDisplay(
-                        slider,
-                        id
-                    );
-
-                }
-            );
-
-        });
+            }
+        );
 
 
     document
-        .querySelectorAll(".show-all-energy")
-        .forEach(function(button) {
+        .querySelectorAll(
+            ".show-all-energy"
+        )
+        .forEach(
+            button => {
 
-            button.addEventListener(
-                "click",
-                showAllPowerPlants
-            );
+                button.addEventListener(
+                    "click",
+                    showAllPowerPlants
+                );
 
-        });
+            }
+        );
 
 }
 
+
+// =====================================================
+// AKTUALIZACJA SUWAKA
+// =====================================================
 
 function updateSliderDisplay(
     slider,
@@ -1643,10 +2052,12 @@ function updateSliderDisplay(
             "percent-" + id
         );
 
+
     const singlePercent =
         document.getElementById(
             "single-percent-" + id
         );
+
 
     const singlePower =
         document.getElementById(
@@ -1688,6 +2099,7 @@ function updateSliderDisplay(
 
         const stats =
             calculatePlantStats(id);
+
 
         const details =
             row.querySelector(
@@ -1731,6 +2143,7 @@ function showRecycling() {
 
     const id =
         "recycling-1";
+
 
     const cost =
         getCost(
@@ -1794,6 +2207,7 @@ function showBus() {
     const id =
         "bus-1";
 
+
     const cost =
         getCost(
             300,
@@ -1856,6 +2270,7 @@ function showHospital() {
     const id =
         "hospital-1";
 
+
     const cost =
         getCost(
             350,
@@ -1903,646 +2318,675 @@ function showHospital() {
 
 
 // =====================================================
-// KLIKANIE OBIEKTÓW
+// KLIKANIE OBIEKTÓW MIASTA
 // =====================================================
 
 document
     .querySelectorAll(
         ".city-view [data-type]"
     )
-    .forEach(function(object) {
+    .forEach(
+        object => {
 
-        object.addEventListener(
-            "click",
-            function() {
+            object.addEventListener(
+                "click",
+                function() {
 
-                const type =
-                    object.dataset.type;
-
-                const id =
-                    object.dataset.id;
+                    const type =
+                        object.dataset.type;
 
 
-                if (
-                    type ===
-                    "chemical-factory"
-                ) {
+                    const id =
+                        object.dataset.id;
 
-                    showChemicalFactory();
+
+                    if (
+                        type ===
+                        "chemical-factory"
+                    ) {
+
+                        showChemicalFactory();
+
+                    }
+
+
+                    else if (
+                        type ===
+                        "industrial-factory"
+                    ) {
+
+                        showIndustrialFactory();
+
+                    }
+
+
+                    else if (
+                        type ===
+                        "office"
+                    ) {
+
+                        showOffice(id);
+
+                    }
+
+
+                    else if (
+                        type ===
+                        "house"
+                    ) {
+
+                        showHouse();
+
+                    }
+
+
+                    else if (
+                        type ===
+                        "park"
+                    ) {
+
+                        showPark(id);
+
+                    }
+
+
+                    else if (
+                        type ===
+                        "car"
+                    ) {
+
+                        showCar(id);
+
+                    }
+
+
+                    else if (
+                        type ===
+                        "power-plant"
+                    ) {
+
+                        showPowerPlant(id);
+
+                    }
+
+
+                    else if (
+                        type ===
+                        "recycling"
+                    ) {
+
+                        showRecycling();
+
+                    }
+
+
+                    else if (
+                        type ===
+                        "bus"
+                    ) {
+
+                        showBus();
+
+                    }
+
+
+                    else if (
+                        type ===
+                        "hospital"
+                    ) {
+
+                        showHospital();
+
+                    }
 
                 }
+            );
 
-                else if (
-                    type ===
-                    "industrial-factory"
-                ) {
-
-                    showIndustrialFactory();
-
-                }
-
-                else if (
-                    type ===
-                    "office"
-                ) {
-
-                    showOffice(id);
-
-                }
-
-                else if (
-                    type ===
-                    "house"
-                ) {
-
-                    showHouse();
-
-                }
-
-                else if (
-                    type ===
-                    "park"
-                ) {
-
-                    showPark(id);
-
-                }
-
-                else if (
-                    type ===
-                    "car"
-                ) {
-
-                    showCar(id);
-
-                }
-
-                else if (
-                    type ===
-                    "power-plant"
-                ) {
-
-                    showPowerPlant(id);
-
-                }
-
-                else if (
-                    type ===
-                    "recycling"
-                ) {
-
-                    showRecycling();
-
-                }
-
-                else if (
-                    type ===
-                    "bus"
-                ) {
-
-                    showBus();
-
-                }
-
-                else if (
-                    type ===
-                    "hospital"
-                ) {
-
-                    showHospital();
-
-                }
-
-            }
-        );
-
-    });
+        }
+    );
 
 
 // =====================================================
-// ULEPSZENIA
+// ULEPSZENIA — GŁÓWNY HANDLER
 // =====================================================
 
-infoPanel.addEventListener(
-    "click",
-    function(event) {
+if (infoPanel) {
 
-        const button =
-            event.target.closest(
-                ".upgrade-button"
-            );
+    infoPanel.addEventListener(
+        "click",
+        function(event) {
 
-
-        if (!button) {
-            return;
-        }
-
-
-        const action =
-            button.dataset.action;
-
-        const id =
-            button.dataset.id;
-
-
-        if (
-            getRemainingCooldown(id) > 0
-        ) {
-
-            return;
-
-        }
-
-
-        // =================================================
-        // FABRYKA CHEMICZNA
-        // =================================================
-
-        if (
-            action ===
-            "chemical"
-        ) {
-
-            const level =
-                factories[id];
-
-            const cost =
-                getCost(
-                    300,
-                    level
+            const button =
+                event.target.closest(
+                    ".upgrade-button"
                 );
 
 
-            if (budget < cost) {
-
-                alert(
-                    "❌ Za mało pieniędzy!"
-                );
+            if (!button) {
 
                 return;
 
             }
 
 
-            budget -= cost;
-
-            co2 -= 5;
-
-            cleanliness += 5;
-
-            satisfaction += 2;
-
-            factories[id]++;
+            const action =
+                button.dataset.action;
 
 
-            startCooldown(id);
-
-            updateStats();
-
-            saveGame();
-
-            showChemicalFactory();
-
-            return;
-
-        }
+            const id =
+                button.dataset.id;
 
 
-        // =================================================
-        // FABRYKA PRZEMYSŁOWA
-        // =================================================
-
-        if (
-            action ===
-            "industrial"
-        ) {
-
-            const level =
-                factories[id];
-
-            const cost =
-                getCost(
-                    350,
-                    level
-                );
-
-
-            if (budget < cost) {
-
-                alert(
-                    "❌ Za mało pieniędzy!"
-                );
+            if (
+                getRemainingCooldown(id) > 0
+            ) {
 
                 return;
 
             }
 
 
-            budget -= cost;
+            // =================================================
+            // FABRYKA CHEMICZNA
+            // =================================================
 
-            co2 -= 6;
+            if (
+                action ===
+                "chemical"
+            ) {
 
-            cleanliness += 5;
-
-            satisfaction += 2;
-
-            factories[id]++;
-
-
-            startCooldown(id);
-
-            updateStats();
-
-            saveGame();
-
-            showIndustrialFactory();
-
-            return;
-
-        }
+                const level =
+                    factories[id];
 
 
-        // =================================================
-        // BIUROWIEC
-        // =================================================
-
-        if (
-            action ===
-            "office"
-        ) {
-
-            const level =
-                offices[id];
-
-            const cost =
-                getCost(
-                    100,
-                    level
-                );
+                const cost =
+                    getCost(
+                        300,
+                        level
+                    );
 
 
-            if (budget < cost) {
+                if (budget < cost) {
 
-                alert(
-                    "❌ Za mało pieniędzy!"
-                );
+                    alert(
+                        "❌ Za mało pieniędzy!"
+                    );
 
-                return;
+                    return;
 
-            }
-
-
-            budget -= cost;
-
-            co2 -= 2;
-
-            cleanliness += 1;
-
-            satisfaction += 2;
-
-            offices[id]++;
+                }
 
 
-            startCooldown(id);
+                budget -= cost;
 
-            updateStats();
+                co2 -= 5;
 
-            saveGame();
+                cleanliness += 5;
 
-            showOffice(id);
+                satisfaction += 2;
 
-            return;
-
-        }
+                factories[id]++;
 
 
-        // =================================================
-        // DOM
-        // =================================================
+                startCooldown(id);
 
-        if (
-            action ===
-            "house"
-        ) {
+                updateStats();
 
-            const cost =
-                getCost(
-                    150,
-                    houseLevel
-                );
+                saveGame();
 
-
-            if (budget < cost) {
-
-                alert(
-                    "❌ Za mało pieniędzy!"
-                );
+                showChemicalFactory();
 
                 return;
 
             }
 
 
-            budget -= cost;
+            // =================================================
+            // FABRYKA PRZEMYSŁOWA
+            // =================================================
 
-            co2 -= 3;
+            if (
+                action ===
+                "industrial"
+            ) {
 
-            cleanliness += 2;
-
-            satisfaction += 3;
-
-
-            houseLevel++;
-
-
-            startCooldown(
-                "house-1"
-            );
-
-            updateStats();
-
-            saveGame();
-
-            showHouse();
-
-            return;
-
-        }
+                const level =
+                    factories[id];
 
 
-        // =================================================
-        // PARK
-        // =================================================
-
-        if (
-            action ===
-            "park"
-        ) {
-
-            const level =
-                parks[id];
-
-            const cost =
-                getCost(
-                    200,
-                    level
-                );
+                const cost =
+                    getCost(
+                        350,
+                        level
+                    );
 
 
-            if (budget < cost) {
+                if (budget < cost) {
 
-                alert(
-                    "❌ Za mało pieniędzy!"
-                );
+                    alert(
+                        "❌ Za mało pieniędzy!"
+                    );
+
+                    return;
+
+                }
+
+
+                budget -= cost;
+
+                co2 -= 6;
+
+                cleanliness += 5;
+
+                satisfaction += 2;
+
+                factories[id]++;
+
+
+                startCooldown(id);
+
+                updateStats();
+
+                saveGame();
+
+                showIndustrialFactory();
 
                 return;
 
             }
 
 
-            budget -= cost;
+            // =================================================
+            // BIUROWIEC
+            // =================================================
 
-            co2 -= 2;
+            if (
+                action ===
+                "office"
+            ) {
 
-            cleanliness +=
-                5 + level * 2;
-
-            satisfaction +=
-                3 + level;
-
-
-            parks[id]++;
-
-
-            startCooldown(id);
-
-            updateStats();
-
-            saveGame();
-
-            showPark(id);
-
-            return;
-
-        }
+                const level =
+                    offices[id];
 
 
-        // =================================================
-        // SAMOCHÓD
-        // =================================================
-
-        if (
-            action ===
-            "car"
-        ) {
-
-            const level =
-                cars[id];
-
-            const cost =
-                getCost(
-                    250,
-                    level
-                );
+                const cost =
+                    getCost(
+                        100,
+                        level
+                    );
 
 
-            if (budget < cost) {
+                if (budget < cost) {
 
-                alert(
-                    "❌ Za mało pieniędzy!"
-                );
+                    alert(
+                        "❌ Za mało pieniędzy!"
+                    );
+
+                    return;
+
+                }
+
+
+                budget -= cost;
+
+                co2 -= 2;
+
+                cleanliness += 1;
+
+                satisfaction += 2;
+
+                offices[id]++;
+
+
+                startCooldown(id);
+
+                updateStats();
+
+                saveGame();
+
+                showOffice(id);
 
                 return;
 
             }
 
 
-            budget -= cost;
+            // =================================================
+            // DOM
+            // =================================================
 
-            co2 -= 5;
+            if (
+                action ===
+                "house"
+            ) {
 
-            cleanliness += 2;
-
-            satisfaction += 4;
-
-
-            cars[id]++;
-
-
-            startCooldown(id);
-
-            updateStats();
-
-            saveGame();
-
-            showCar(id);
-
-            return;
-
-        }
+                const cost =
+                    getCost(
+                        150,
+                        houseLevel
+                    );
 
 
-        // =================================================
-        // RECYKLING
-        // =================================================
+                if (budget < cost) {
 
-        if (
-            action ===
-            "recycling"
-        ) {
+                    alert(
+                        "❌ Za mało pieniędzy!"
+                    );
 
-            const cost =
-                getCost(
-                    250,
-                    recyclingLevel
+                    return;
+
+                }
+
+
+                budget -= cost;
+
+                co2 -= 3;
+
+                cleanliness += 2;
+
+                satisfaction += 3;
+
+
+                houseLevel++;
+
+
+                startCooldown(
+                    "house-1"
                 );
 
 
-            if (budget < cost) {
+                updateStats();
 
-                alert(
-                    "❌ Za mało pieniędzy!"
-                );
+                saveGame();
+
+                showHouse();
 
                 return;
 
             }
 
 
-            budget -= cost;
+            // =================================================
+            // PARK
+            // =================================================
 
-            co2 -= 2;
+            if (
+                action ===
+                "park"
+            ) {
 
-            cleanliness += 7;
-
-            satisfaction += 4;
-
-
-            recyclingLevel++;
-
-
-            startCooldown(
-                "recycling-1"
-            );
-
-            updateStats();
-
-            saveGame();
-
-            showRecycling();
-
-            return;
-
-        }
+                const level =
+                    parks[id];
 
 
-        // =================================================
-        // AUTOBUS
-        // =================================================
-
-        if (
-            action ===
-            "bus"
-        ) {
-
-            const cost =
-                getCost(
-                    300,
-                    busLevel
-                );
+                const cost =
+                    getCost(
+                        200,
+                        level
+                    );
 
 
-            if (budget < cost) {
+                if (budget < cost) {
 
-                alert(
-                    "❌ Za mało pieniędzy!"
-                );
+                    alert(
+                        "❌ Za mało pieniędzy!"
+                    );
 
-                return;
+                    return;
 
-            }
-
-
-            budget -= cost;
-
-            co2 -= 5;
-
-            cleanliness += 3;
-
-            satisfaction += 6;
+                }
 
 
-            busLevel++;
+                budget -= cost;
+
+                co2 -= 2;
+
+                cleanliness +=
+                    5 + level * 2;
+
+                satisfaction +=
+                    3 + level;
 
 
-            startCooldown(
-                "bus-1"
-            );
-
-            updateStats();
-
-            saveGame();
-
-            showBus();
-
-            return;
-
-        }
+                parks[id]++;
 
 
-        // =================================================
-        // SZPITAL
-        // =================================================
+                startCooldown(id);
 
-        if (
-            action ===
-            "hospital"
-        ) {
+                updateStats();
 
-            const cost =
-                getCost(
-                    350,
-                    hospitalLevel
-                );
+                saveGame();
 
-
-            if (budget < cost) {
-
-                alert(
-                    "❌ Za mało pieniędzy!"
-                );
+                showPark(id);
 
                 return;
 
             }
 
 
-            budget -= cost;
+            // =================================================
+            // SAMOCHÓD
+            // =================================================
 
-            satisfaction +=
-                7 +
-                hospitalLevel * 2;
+            if (
+                action ===
+                "car"
+            ) {
+
+                const level =
+                    cars[id];
 
 
-            hospitalLevel++;
+                const cost =
+                    getCost(
+                        250,
+                        level
+                    );
 
 
-            startCooldown(
-                "hospital-1"
-            );
+                if (budget < cost) {
 
-            updateStats();
+                    alert(
+                        "❌ Za mało pieniędzy!"
+                    );
 
-            saveGame();
+                    return;
 
-            showHospital();
+                }
 
-            return;
+
+                budget -= cost;
+
+                co2 -= 5;
+
+                cleanliness += 2;
+
+                satisfaction += 4;
+
+
+                cars[id]++;
+
+
+                startCooldown(id);
+
+                updateStats();
+
+                saveGame();
+
+                showCar(id);
+
+                return;
+
+            }
+
+
+            // =================================================
+            // RECYKLING
+            // =================================================
+
+            if (
+                action ===
+                "recycling"
+            ) {
+
+                const cost =
+                    getCost(
+                        250,
+                        recyclingLevel
+                    );
+
+
+                if (budget < cost) {
+
+                    alert(
+                        "❌ Za mało pieniędzy!"
+                    );
+
+                    return;
+
+                }
+
+
+                budget -= cost;
+
+                co2 -= 2;
+
+                cleanliness += 7;
+
+                satisfaction += 4;
+
+
+                recyclingLevel++;
+
+
+                startCooldown(
+                    "recycling-1"
+                );
+
+
+                updateStats();
+
+                saveGame();
+
+                showRecycling();
+
+                return;
+
+            }
+
+
+            // =================================================
+            // AUTOBUS
+            // =================================================
+
+            if (
+                action ===
+                "bus"
+            ) {
+
+                const cost =
+                    getCost(
+                        300,
+                        busLevel
+                    );
+
+
+                if (budget < cost) {
+
+                    alert(
+                        "❌ Za mało pieniędzy!"
+                    );
+
+                    return;
+
+                }
+
+
+                budget -= cost;
+
+                co2 -= 5;
+
+                cleanliness += 3;
+
+                satisfaction += 6;
+
+
+                busLevel++;
+
+
+                startCooldown(
+                    "bus-1"
+                );
+
+
+                updateStats();
+
+                saveGame();
+
+                showBus();
+
+                return;
+
+            }
+
+
+            // =================================================
+            // SZPITAL
+            // =================================================
+
+            if (
+                action ===
+                "hospital"
+            ) {
+
+                const cost =
+                    getCost(
+                        350,
+                        hospitalLevel
+                    );
+
+
+                if (budget < cost) {
+
+                    alert(
+                        "❌ Za mało pieniędzy!"
+                    );
+
+                    return;
+
+                }
+
+
+                budget -= cost;
+
+
+                satisfaction +=
+                    7 +
+                    hospitalLevel * 2;
+
+
+                hospitalLevel++;
+
+
+                startCooldown(
+                    "hospital-1"
+                );
+
+
+                updateStats();
+
+                saveGame();
+
+                showHospital();
+
+                return;
+
+            }
 
         }
+    );
 
-    }
-);
+}
 
 
 // =====================================================
@@ -2554,6 +2998,10 @@ if (endTurnButton) {
     endTurnButton.addEventListener(
         "click",
         function() {
+
+            // -------------------------------------------------
+            // SPRAWDZENIE BLOKADY
+            // -------------------------------------------------
 
             if (isTurnLocked()) {
 
@@ -2571,10 +3019,15 @@ if (endTurnButton) {
                     " sekund."
                 );
 
+
                 return;
 
             }
 
+
+            // -------------------------------------------------
+            // LICZENIE SZYBKICH TUR
+            // -------------------------------------------------
 
             const now =
                 Date.now();
@@ -2591,13 +3044,18 @@ if (endTurnButton) {
             turnTimes.push(now);
 
 
+            // -------------------------------------------------
+            // OSTRZEŻENIE
+            // -------------------------------------------------
+
             if (
                 turnTimes.length >=
                 TURN_LIMIT &&
                 !turnWarningShown
             ) {
 
-                turnWarningShown = true;
+                turnWarningShown =
+                    true;
 
 
                 infoPanel.innerHTML = `
@@ -2645,6 +3103,7 @@ if (endTurnButton) {
 
                             turnTimes = [];
 
+
                             turnWarningShown =
                                 false;
 
@@ -2689,11 +3148,12 @@ if (endTurnButton) {
 
 
             // =================================================
-            // DOCHÓD
+            // DOCHÓD MIASTA
             // =================================================
 
             const status =
                 getCityStatus();
+
 
             let income = 0;
 
@@ -2707,6 +3167,7 @@ if (endTurnButton) {
 
             }
 
+
             else if (
                 status.name ===
                 "ZŁY"
@@ -2715,6 +3176,7 @@ if (endTurnButton) {
                 income = 250;
 
             }
+
 
             else if (
                 status.name ===
@@ -2725,6 +3187,7 @@ if (endTurnButton) {
 
             }
 
+
             else if (
                 status.name ===
                 "DOBRY"
@@ -2734,12 +3197,17 @@ if (endTurnButton) {
 
             }
 
+
             else {
 
                 income = 550;
 
             }
 
+
+            // -------------------------------------------------
+            // BONUS ZA ZADOWOLENIE
+            // -------------------------------------------------
 
             if (
                 satisfaction >= 80
@@ -2759,12 +3227,16 @@ if (endTurnButton) {
 
 
             // =================================================
-            // ENERGIA
+            // SYSTEM ENERGII
             // =================================================
 
             const energy =
                 calculateEnergySystem();
 
+
+            // -------------------------------------------------
+            // WPŁYW ELEKTROWNI
+            // -------------------------------------------------
 
             co2 +=
                 Math.round(
@@ -2778,13 +3250,20 @@ if (endTurnButton) {
                 );
 
 
+            // -------------------------------------------------
+            // KOSZT ENERGII
+            // -------------------------------------------------
+
             const realEnergyCost =
                 energy.totalCost;
 
 
-            budget += income;
+            budget +=
+                income;
 
-            budget -= realEnergyCost;
+
+            budget -=
+                realEnergyCost;
 
 
             // =================================================
@@ -2816,7 +3295,9 @@ if (endTurnButton) {
             turn++;
 
 
-            // Naturalne pogarszanie
+            // =================================================
+            // NATURALNE POGARSZANIE
+            // =================================================
 
             co2 += 3;
 
@@ -2824,6 +3305,10 @@ if (endTurnButton) {
 
             satisfaction -= 3;
 
+
+            // =================================================
+            // AKTUALIZACJA
+            // =================================================
 
             updateStats();
 
@@ -2833,6 +3318,10 @@ if (endTurnButton) {
             const newStatus =
                 getCityStatus();
 
+
+            // =================================================
+            // RAPORT MIASTA
+            // =================================================
 
             infoPanel.innerHTML = `
 
@@ -2856,7 +3345,9 @@ if (endTurnButton) {
 
                 <p>
                     ${newStatus.emoji}
+
                     Stan miasta:
+
                     <strong>
                         ${newStatus.name}
                     </strong>
@@ -2902,7 +3393,8 @@ if (endTurnButton) {
                 <p>
                     📊 Bilans:
                     <strong>
-                        ${energy.production - energy.demand} MW
+                        ${energy.production -
+                        energy.demand} MW
                     </strong>
                 </p>
 
@@ -2915,15 +3407,20 @@ if (endTurnButton) {
 
                 ${
                     energy.shortage > 0
-                    ? `
-                        <p>
-                            🚨 Kara za brak energii:
-                            <strong>
-                                -${energy.emergencyCost} $
-                            </strong>
-                        </p>
-                    `
-                    : ""
+
+                        ? `
+
+                            <p>
+                                🚨 Kara za brak energii:
+
+                                <strong>
+                                    -${energy.emergencyCost} $
+                                </strong>
+                            </p>
+
+                        `
+
+                        : ""
                 }
 
                 <p>
@@ -2951,37 +3448,51 @@ if (endTurnButton) {
                     </strong>
                 </p>
 
+
                 ${
                     energy.shortage > 0
-                    ? `
-                        <div class="critical-message">
 
-                            🚨
-                            <strong>
-                                Niedobór energii!
-                            </strong>
+                        ? `
 
-                            <br><br>
+                            <div
+                                class="critical-message"
+                            >
 
-                            Miasto potrzebuje
-                            ${energy.demand} MW,
-                            ale produkuje tylko
-                            ${energy.production} MW.
+                                🚨
 
-                            <br><br>
+                                <strong>
+                                    Niedobór energii!
+                                </strong>
 
-                            Rozważ zwiększenie
-                            mocy elektrowni.
+                                <br><br>
 
-                        </div>
-                    `
-                    : `
-                        <p>
-                            🟢 Energia pokrywa
-                            całe zapotrzebowanie miasta.
-                        </p>
-                    `
+                                Miasto potrzebuje
+
+                                ${energy.demand} MW,
+
+                                ale produkuje tylko
+
+                                ${energy.production} MW.
+
+                                <br><br>
+
+                                Rozważ zwiększenie
+                                mocy elektrowni.
+
+                            </div>
+
+                        `
+
+                        : `
+
+                            <p>
+                                🟢 Energia pokrywa
+                                całe zapotrzebowanie miasta.
+                            </p>
+
+                        `
                 }
+
 
                 <button
                     class="show-all-energy"
@@ -2992,14 +3503,20 @@ if (endTurnButton) {
             `;
 
 
-            document
-                .querySelector(
+            const energyButton =
+                infoPanel.querySelector(
                     ".show-all-energy"
-                )
-                ?.addEventListener(
+                );
+
+
+            if (energyButton) {
+
+                energyButton.addEventListener(
                     "click",
                     showAllPowerPlants
                 );
+
+            }
 
         }
     );
@@ -3008,7 +3525,7 @@ if (endTurnButton) {
 
 
 // =====================================================
-// RESET
+// RESET GRY
 // =====================================================
 
 if (resetButton) {
@@ -3024,9 +3541,15 @@ if (resetButton) {
 
 
             if (!confirmed) {
+
                 return;
+
             }
 
+
+            // -------------------------------------------------
+            // STATYSTYKI
+            // -------------------------------------------------
 
             co2 = 75;
 
@@ -3038,9 +3561,14 @@ if (resetButton) {
 
             turn = 1;
 
+
             cityName =
                 "Moje miasto";
 
+
+            // -------------------------------------------------
+            // BLOKADA TUR
+            // -------------------------------------------------
 
             turnTimes = [];
 
@@ -3049,28 +3577,45 @@ if (resetButton) {
             turnLockedUntil = 0;
 
 
+            // -------------------------------------------------
+            // OBIEKTY
+            // -------------------------------------------------
+
             offices = {
+
                 "office-1": 0,
+
                 "office-2": 0
+
             };
 
 
             parks = {
+
                 "park-1": 0,
+
                 "park-2": 0,
+
                 "park-3": 0
+
             };
 
 
             cars = {
+
                 "car-1": 0,
+
                 "car-2": 0
+
             };
 
 
             factories = {
+
                 "factory-1": 0,
+
                 "factory-2": 0
+
             };
 
 
@@ -3082,8 +3627,13 @@ if (resetButton) {
 
             hospitalLevel = 0;
 
+
             cooldowns = {};
 
+
+            // -------------------------------------------------
+            // ELEKTROWNIE
+            // -------------------------------------------------
 
             powerPlants.coal.power = 25;
 
@@ -3095,6 +3645,10 @@ if (resetButton) {
 
             powerPlants.nuclear.power = 60;
 
+
+            // -------------------------------------------------
+            // AKTUALIZACJA
+            // -------------------------------------------------
 
             updateStats();
 
@@ -3126,53 +3680,56 @@ if (resetButton) {
 
 
 // =====================================================
-// ZAPIS
+// ZAPIS GRY
 // =====================================================
 
 function saveGame() {
 
+    const gameData = {
+
+        co2,
+
+        cleanliness,
+
+        satisfaction,
+
+        budget,
+
+        turn,
+
+        cityName,
+
+        offices,
+
+        parks,
+
+        cars,
+
+        factories,
+
+        houseLevel,
+
+        recyclingLevel,
+
+        busLevel,
+
+        hospitalLevel,
+
+        powerPlants
+
+    };
+
+
     localStorage.setItem(
         "climateZero",
-        JSON.stringify({
-
-            co2,
-
-            cleanliness,
-
-            satisfaction,
-
-            budget,
-
-            turn,
-
-            cityName,
-
-            offices,
-
-            parks,
-
-            cars,
-
-            factories,
-
-            houseLevel,
-
-            recyclingLevel,
-
-            busLevel,
-
-            hospitalLevel,
-
-            powerPlants
-
-        })
+        JSON.stringify(gameData)
     );
 
 }
 
 
 // =====================================================
-// WCZYTANIE
+// WCZYTYWANIE GRY
 // =====================================================
 
 function loadGame() {
@@ -3198,37 +3755,53 @@ function loadGame() {
             JSON.parse(saved);
 
 
+        // -------------------------------------------------
+        // STATYSTYKI
+        // -------------------------------------------------
+
         co2 =
             game.co2 ?? 75;
+
 
         cleanliness =
             game.cleanliness ?? 40;
 
+
         satisfaction =
             game.satisfaction ?? 60;
+
 
         budget =
             game.budget ?? 1000;
 
+
         turn =
             game.turn ?? 1;
+
 
         cityName =
             game.cityName ??
             "Moje miasto";
 
 
+        // -------------------------------------------------
+        // OBIEKTY
+        // -------------------------------------------------
+
         offices =
             game.offices ??
             offices;
+
 
         parks =
             game.parks ??
             parks;
 
+
         cars =
             game.cars ??
             cars;
+
 
         factories =
             game.factories ??
@@ -3236,45 +3809,63 @@ function loadGame() {
 
 
         houseLevel =
-            game.houseLevel ?? 0;
+            game.houseLevel ??
+            0;
+
 
         recyclingLevel =
-            game.recyclingLevel ?? 0;
+            game.recyclingLevel ??
+            0;
+
 
         busLevel =
-            game.busLevel ?? 0;
+            game.busLevel ??
+            0;
+
 
         hospitalLevel =
-            game.hospitalLevel ?? 0;
+            game.hospitalLevel ??
+            0;
 
+
+        // -------------------------------------------------
+        // ELEKTROWNIE
+        // -------------------------------------------------
 
         if (game.powerPlants) {
 
             Object.keys(powerPlants)
-                .forEach(function(id) {
+                .forEach(
+                    id => {
 
-                    if (
-                        game.powerPlants[id]
-                    ) {
+                        if (
+                            game.powerPlants[id]
+                        ) {
 
-                        powerPlants[id].power =
-                            game.powerPlants[id].power;
+                            powerPlants[id].power =
+                                game.powerPlants[id].power;
+
+                        }
 
                     }
-
-                });
+                );
 
         }
 
+
+        // -------------------------------------------------
+        // AKTUALIZACJA
+        // -------------------------------------------------
 
         updateStats();
 
     }
 
+
     catch (error) {
 
         console.error(
-            "Błąd wczytywania:",
+            "Błąd wczytywania gry:",
             error
         );
 
@@ -3292,7 +3883,7 @@ function loadGame() {
 
 
 // =====================================================
-// AUTOMATYCZNE COOLDOWNY
+// AUTOMATYCZNE ODŚWIEŻANIE COOLDOWNÓW
 // =====================================================
 
 setInterval(
@@ -3305,16 +3896,33 @@ setInterval(
 
 
         if (!active) {
+
             return;
+
         }
 
 
-        const parent =
-            active.parentElement;
+        // Odświeżamy aktualny panel,
+        // jeżeli cooldown właśnie się skończył.
+
+        if (
+            getRemainingCooldown(
+                active.dataset.id
+            ) <= 0
+        ) {
+
+            const selectedButton =
+                active.closest(
+                    ".info-panel"
+                );
 
 
-        if (!parent) {
-            return;
+            if (selectedButton) {
+
+                updateStats();
+
+            }
+
         }
 
     },
@@ -3323,7 +3931,7 @@ setInterval(
 
 
 // =====================================================
-// STATUS TURY
+// ODŚWIEŻANIE STATUSU TUR
 // =====================================================
 
 setInterval(
@@ -3337,7 +3945,12 @@ setInterval(
 
 
 // =====================================================
-// START
+// START GRY
 // =====================================================
 
 loadGame();
+
+
+// =====================================================
+// KONIEC SCRIPT.JS
+// =====================================================

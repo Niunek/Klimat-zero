@@ -11,10 +11,14 @@
 
 <body>
 
-<header>
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header class="top-header">
 
     <div class="logo">
-        🌍 Climate: Zero
+        🌍 <span>Climate: Zero</span>
     </div>
 
     <div
@@ -22,30 +26,54 @@
         id="city-name-display"
         title="Kliknij, aby zmienić nazwę miasta"
     >
-        🏙️ Moje miasto
+        🏙️ <span id="header-city-name">Moje miasto</span>
     </div>
 
 </header>
 
+
+<!-- =========================================================
+     GŁÓWNA CZĘŚĆ GRY
+========================================================= -->
 
 <main>
 
 <section class="city-panel">
 
 
-    <!-- ================================================= -->
-    <!-- INTRO -->
-    <!-- ================================================= -->
+    <!-- =====================================================
+         INTRO / NAZWA MIASTA / TURA
+    ====================================================== -->
 
     <div class="city-intro">
 
-        <h1>
-            🏙️ <span id="city-title">Moje miasto</span>
-        </h1>
+        <div class="intro-title-row">
 
-        <p>
-            Zarządzaj miastem i zmniejszaj jego wpływ na klimat.
-        </p>
+            <div class="intro-text">
+
+                <h1>
+                    🏙️
+                    <span id="city-title">Moje miasto</span>
+                </h1>
+
+                <p>
+                    Zarządzaj miastem, rozwijaj je i zmniejszaj jego wpływ na klimat.
+                </p>
+
+            </div>
+
+
+            <div class="turn-badge">
+
+                📅 Tura
+                <strong id="turn">1</strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- Edycja nazwy miasta -->
 
         <div class="city-name-editor">
 
@@ -54,6 +82,7 @@
                 id="city-name-input"
                 placeholder="Wpisz nazwę miasta"
                 maxlength="30"
+                autocomplete="off"
             >
 
             <button id="save-city-name">
@@ -65,131 +94,157 @@
     </div>
 
 
-    <!-- ================================================= -->
-    <!-- MIASTO -->
-    <!-- ================================================= -->
 
-    <div class="city-view">
+    <!-- =====================================================
+         WIDOK MIASTA
+    ====================================================== -->
+
+    <div
+        class="city-view"
+        id="city-view"
+    >
 
 
-        <!-- BIUROWCE -->
+        <!-- =================================================
+             BIUROWCE
+        ================================================== -->
 
         <div
-            class="building"
+            class="building office"
             data-type="office"
             data-id="office-1"
             data-effect="⚡"
-            title="Biurowiec — zużywa energię"
+            title="Biurowiec"
         >
             🏢
         </div>
 
+
         <div
-            class="building"
+            class="building office"
             data-type="office"
             data-id="office-2"
             data-effect="⚡"
-            title="Biurowiec — zużywa energię"
+            title="Biurowiec"
         >
             🏢
         </div>
 
 
-        <!-- FABRYKI -->
+
+        <!-- =================================================
+             FABRYKI
+        ================================================== -->
 
         <div
-            class="building factory"
+            class="building factory chemical-factory"
             data-type="chemical-factory"
             data-id="factory-1"
             data-effect="🌫️"
-            title="Fabryka chemiczna — emituje CO₂"
+            title="Fabryka chemiczna"
         >
             🏭
         </div>
 
+
         <div
-            class="building factory"
+            class="building factory industrial-factory"
             data-type="industrial-factory"
             data-id="factory-2"
             data-effect="🌫️"
-            title="Fabryka przemysłowa — emituje CO₂"
+            title="Fabryka przemysłowa"
         >
             🏭
         </div>
 
 
-        <!-- DOM -->
+
+        <!-- =================================================
+             DOM
+        ================================================== -->
 
         <div
-            class="building"
+            class="building house"
             data-type="house"
             data-id="house-1"
             data-effect="⚡"
-            title="Dom — zużywa energię"
+            title="Dom"
         >
             🏠
         </div>
 
 
-        <!-- PARKI -->
+
+        <!-- =================================================
+             PARKI
+        ================================================== -->
 
         <div
-            class="tree"
+            class="tree park"
             data-type="park"
             data-id="park-1"
             data-effect="🌱"
-            title="Park — poprawia czystość"
+            title="Park"
         >
             🌳
         </div>
 
+
         <div
-            class="tree"
+            class="tree park"
             data-type="park"
             data-id="park-2"
             data-effect="🌱"
-            title="Park — poprawia czystość"
+            title="Park"
         >
             🌳
         </div>
 
+
         <div
-            class="tree"
+            class="tree park"
             data-type="park"
             data-id="park-3"
             data-effect="🌱"
-            title="Park — poprawia czystość"
+            title="Park"
         >
             🌳
         </div>
 
 
-        <!-- SAMOCHODY -->
+
+        <!-- =================================================
+             SAMOCHODY
+        ================================================== -->
 
         <div
             class="car"
             data-type="car"
             data-id="car-1"
             data-effect="🌫️"
-            title="Samochód — zwiększa CO₂"
+            title="Samochód"
         >
             🚗
         </div>
+
 
         <div
             class="car"
             data-type="car"
             data-id="car-2"
             data-effect="🌫️"
-            title="Samochód — zwiększa CO₂"
+            title="Samochód"
         >
             🚙
         </div>
 
 
-        <!-- ================================================= -->
-        <!-- ELEKTROWNIE -->
-        <!-- ================================================= -->
+
+        <!-- =================================================
+             ELEKTROWNIE
+        ================================================== -->
+
+        <!-- Elektrownia węglowa -->
 
         <div
             class="building power-plant coal-plant"
@@ -201,6 +256,9 @@
             🏭
         </div>
 
+
+        <!-- Elektrownia wiatrowa -->
+
         <div
             class="building power-plant wind-plant"
             data-type="power-plant"
@@ -210,6 +268,9 @@
         >
             🌬️
         </div>
+
+
+        <!-- Elektrownia wodna -->
 
         <div
             class="building power-plant water-plant"
@@ -221,6 +282,9 @@
             💧
         </div>
 
+
+        <!-- Elektrownia słoneczna -->
+
         <div
             class="building power-plant solar-plant"
             data-type="power-plant"
@@ -230,6 +294,9 @@
         >
             ☀️
         </div>
+
+
+        <!-- Elektrownia jądrowa -->
 
         <div
             class="building power-plant nuclear-plant"
@@ -242,101 +309,218 @@
         </div>
 
 
-        <!-- ================================================= -->
-        <!-- INNE -->
-        <!-- ================================================= -->
+
+        <!-- =================================================
+             NOWE BUDYNKI
+        ================================================== -->
+
+        <!-- Centrum recyklingu -->
 
         <div
             class="building recycling"
             data-type="recycling"
             data-id="recycling-1"
             data-effect="🌱"
-            title="Centrum recyklingu — poprawia czystość"
+            title="Centrum recyklingu"
         >
             ♻️
         </div>
+
+
+        <!-- Centrum komunikacji -->
 
         <div
             class="building bus-depot"
             data-type="bus"
             data-id="bus-1"
             data-effect="😊"
-            title="Zajezdnia autobusowa — poprawia zadowolenie"
+            title="Centrum komunikacji"
         >
             🚌
         </div>
+
+
+        <!-- Szpital -->
 
         <div
             class="building hospital"
             data-type="hospital"
             data-id="hospital-1"
             data-effect="😊"
-            title="Szpital — poprawia zadowolenie"
+            title="Szpital"
         >
             🏥
         </div>
 
+
+        <!-- Szkoła -->
+
+        <div
+            class="building school"
+            data-type="school"
+            data-id="school-1"
+            data-effect="😊"
+            title="Szkoła"
+        >
+            🏫
+        </div>
+
+
+        <!-- Duży park -->
+
+        <div
+            class="tree big-park"
+            data-type="big-park"
+            data-id="big-park-1"
+            data-effect="🌱"
+            title="Duży park"
+        >
+            🌲
+        </div>
+
+
     </div>
 
 
-    <!-- ================================================= -->
-    <!-- PANEL INFORMACJI -->
-    <!-- ================================================= -->
 
-    <div id="info-panel" class="info-panel">
+    <!-- =====================================================
+         EFEKTY MIASTA
+    ====================================================== -->
 
-        <h2>🏙️ Miasto</h2>
+    <div
+        id="city-effects"
+        class="city-effects"
+        aria-hidden="true"
+    ></div>
+
+
+
+    <!-- =====================================================
+         PANEL INFORMACYJNY
+    ====================================================== -->
+
+    <div
+        id="info-panel"
+        class="info-panel"
+    >
+
+        <h2>
+            🏙️ Miasto
+        </h2>
 
         <p>
-            Kliknij obiekt w mieście,
-            aby zobaczyć informacje.
+            Kliknij obiekt, aby zobaczyć informacje
+            i dostępne ulepszenia.
         </p>
 
     </div>
 
 
-    <!-- ================================================= -->
-    <!-- STATYSTYKI -->
-    <!-- ================================================= -->
+
+    <!-- =====================================================
+         STATYSTYKI MIASTA
+    ====================================================== -->
 
     <div class="city-stats">
 
-        <div>
-            🌫️ Poziom CO₂
-            <strong id="co2">75%</strong>
+
+        <!-- CO2 -->
+
+        <div class="stat-card co2-card">
+
+            <span>
+                🌫️ Poziom CO₂
+            </span>
+
+            <strong id="co2">
+                75%
+            </strong>
+
         </div>
 
-        <div>
-            🌱 Czystość
-            <strong id="cleanliness">40%</strong>
+
+        <!-- Czystość -->
+
+        <div class="stat-card clean-card">
+
+            <span>
+                🌱 Czystość
+            </span>
+
+            <strong id="cleanliness">
+                40%
+            </strong>
+
         </div>
 
-        <div>
-            😊 Zadowolenie
-            <strong id="satisfaction">60%</strong>
+
+        <!-- Zadowolenie -->
+
+        <div class="stat-card satisfaction-card">
+
+            <span>
+                😊 Zadowolenie
+            </span>
+
+            <strong id="satisfaction">
+                60%
+            </strong>
+
         </div>
 
-        <div>
-            🏭 Fabryki
-            <strong id="factories">2</strong>
+
+        <!-- Fabryki -->
+
+        <div class="stat-card factory-card">
+
+            <span>
+                🏭 Fabryki
+            </span>
+
+            <strong id="factories">
+                2
+            </strong>
+
         </div>
 
-        <div>
-            💰 Budżet
-            <strong id="budget">1000 $</strong>
+
+        <!-- Budżet -->
+
+        <div class="stat-card money-card">
+
+            <span>
+                💰 Budżet
+            </span>
+
+            <strong id="budget">
+                1000 $
+            </strong>
+
         </div>
 
-        <div>
-            📅 Tura
-            <strong id="turn">1</strong>
+
+        <!-- Energia -->
+
+        <div class="stat-card energy-card">
+
+            <span>
+                ⚡ Energia
+            </span>
+
+            <strong id="energy-balance">
+                0 MW
+            </strong>
+
         </div>
+
 
     </div>
 
 
-    <!-- ================================================= -->
-    <!-- CO2 -->
-    <!-- ================================================= -->
+
+    <!-- =====================================================
+         PASEK ZANIECZYSZCZENIA
+    ====================================================== -->
 
     <div class="pollution-bar-container">
 
@@ -352,7 +536,15 @@
 
         </div>
 
-        <div class="pollution-bar">
+
+        <div
+            class="pollution-bar"
+            role="progressbar"
+            aria-label="Poziom zanieczyszczenia"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="75"
+        >
 
             <div id="pollution-fill"></div>
 
@@ -361,7 +553,10 @@
     </div>
 
 
-    <!-- STATUS -->
+
+    <!-- =====================================================
+         STATUS MIASTA
+    ====================================================== -->
 
     <div
         id="city-status"
@@ -371,7 +566,10 @@
     </div>
 
 
-    <!-- STATUS TURY -->
+
+    <!-- =====================================================
+         STATUS TURY
+    ====================================================== -->
 
     <div
         id="turn-status"
@@ -381,24 +579,120 @@
     </div>
 
 
-    <!-- PRZYCISKI -->
+
+    <!-- =====================================================
+         SZYBKIE PANELE
+    ====================================================== -->
+
+    <div class="quick-panels">
+
+
+        <button
+            id="show-events"
+            type="button"
+        >
+            🎲 Wydarzenia
+        </button>
+
+
+        <button
+            id="show-missions"
+            type="button"
+        >
+            🎯 Misje
+        </button>
+
+
+        <button
+            id="show-achievements"
+            type="button"
+        >
+            🏆 Osiągnięcia
+        </button>
+
+
+        <button
+            id="show-energy"
+            type="button"
+        >
+            ⚡ Elektrownie
+        </button>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         GŁÓWNE PRZYCISKI
+    ====================================================== -->
 
     <div class="main-buttons">
 
-        <button id="reset-budget">
+
+        <button
+            id="reset-budget"
+            type="button"
+        >
             🛠️ TEST — Resetuj grę
         </button>
 
-        <button id="end-turn">
+
+        <button
+            id="end-turn"
+            type="button"
+        >
             ⏭️ Zakończ turę
         </button>
 
+
     </div>
+
+
+
+    <!-- =====================================================
+         OBSZAR WYDARZEŃ / MISJI / OSIĄGNIĘĆ
+    ====================================================== -->
+
+    <div
+        id="event-area"
+        class="event-area"
+    ></div>
+
 
 </section>
 
 </main>
 
+
+
+<!-- =========================================================
+     TOASTY / POWIADOMIENIA
+========================================================= -->
+
+<div
+    id="toast-container"
+    aria-live="polite"
+    aria-atomic="true"
+></div>
+
+
+
+<!-- =========================================================
+     WARSTWA EFEKTÓW
+========================================================= -->
+
+<div
+    id="animation-layer"
+    class="animation-layer"
+    aria-hidden="true"
+></div>
+
+
+
+<!-- =========================================================
+     SKRYPT GRY
+========================================================= -->
 
 <script src="script.js"></script>
 
